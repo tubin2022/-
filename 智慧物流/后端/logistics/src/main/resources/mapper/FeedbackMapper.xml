@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lianwei.dao.FeedbackDao">
+    <!-- 添加反馈信息,默认是未处理 -->
+    <insert id="insertFeedbackInfo" parameterType="Feedback">
+        insert into feedback values(#{feedbackId},#{userId},#{logisticsId},
+                                    #{feedbackContext},0,#{handleUserId},#{feedTime})
+    </insert>
+
+    <!-- 根据条件分页查询反馈信息 -->
+    <sql id="feedbackCondition">
+        <where>
+            <if test="feedbackId != null">
+                feedback_id = #{feedbackId}
+            </if>
+            <if test="userId != null">
+                and user_id = #{userId}
+            </if>
+            <if test="logisticsId != null">
+                and logistics_id = #{logisticsId}
+            </if>
+            <if test="feedbackContext != null">
+                <bind name="context" value="'%'+feedbackContext+'%'"/>
+                and feedback_context like #{context}
+            </if>
+            <if test="isHandle != null">
+                and is_handle = #{isHandle}
+            </if>
+            <if test="handleUserId != null">
+                and handle_user_id = #{handleUserId}
+            </if>
+            <if test="feedTime != null">
+                and feed_time = #{feedTime}
+            </if>
+        </where>
+    </sql>
+    <select id="pageQueryFeedbackInfo" parameterType="FeedbackVO" resultType="Feedback">
+        select * from feedback
+        <include refid="feedbackCondition"></include>
+        <if test="pageSize != null and pageNum != null">
+            <bind name="start" value="(pageNum - 1)*pageSize"/>
+            limit #{start},#{pageSize}
+        </if>
+    </select>
+
+    <!-- 根据条件查询反馈记录总数 -->
+    <select id="count" parameterType="FeedbackVO" resultType="int">
+        select count(1) from feedback
+        <include refid="feedbackCondition"></include>
+    </select>
+</mapper>

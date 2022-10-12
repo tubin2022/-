@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lianwei.dao.InHouseDao">
+    <select id="findInHouse" resultType="integer">
+        select sum(num) sums from in_house
+        where pro =#{pro} and time &lt;= #{time} group by pro
+    </select>
+</mapper>

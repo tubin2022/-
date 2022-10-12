@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lianwei.dao.ChinaCompanyDao">
+    <select id="findChinaCompany" parameterType="string" resultType="ChinaCompanyDTO">
+        <bind name="likeTime" value="time+'%'"/>
+        select com name,ifnull(sum(num),0) value from china_company where time like #{likeTime} group by com
+    </select>
+</mapper>

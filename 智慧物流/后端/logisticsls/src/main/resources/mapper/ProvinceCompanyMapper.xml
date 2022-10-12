@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lianwei.dao.ProvinceCompanyDao">
+    <select id="findProvinceCompany" resultType="ProvinceCompanyDTO">
+        <bind name="likeTime" value="time+'%'"/>
+        select com name,sum(num) value from province_company where pro = #{pro} and time like #{likeTime} group by com
+    </select>
+</mapper>

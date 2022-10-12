@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lianwei.dao.ProvinceLogisticsDao">
+    <select id="findProvinceLogistics" resultType="integer">
+        <bind name="likeTime" value="time+'%'"/>
+        select sum(num) sums from province_logistics where time like #{likeTime} and pro = #{pro}
+    </select>
+</mapper>

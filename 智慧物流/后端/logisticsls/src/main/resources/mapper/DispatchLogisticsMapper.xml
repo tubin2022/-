@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lianwei.dao.DispatchLogisticsDao">
+    <select id="findDispatchLogistics" resultType="DispatchLogisticsDTO">
+        <bind name="likeTime" value="time+'%'"/>
+        select pro,city,sum(num) sums from dispatch_logistics
+        where time like #{likeTime}
+        <if test="!(pro == '上海市' or pro == '重庆市' or pro == '天津市' or pro == '北京市')">
+            and pro = #{pro}
+        </if>
+        <if test="pro == '上海市' or pro == '重庆市' or pro == '天津市' or pro == '北京市'">
+            and city = #{pro}
+        </if>
+        group by pro,city
+    </select>
+</mapper>

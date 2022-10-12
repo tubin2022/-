@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lianwei.dao.UserDao">
+    <resultMap id="baseUserMap" type="User">
+        <result property="passFace" column="pass_face" typeHandler="com.lianwei.handler.ListJsonTypeHandler"></result>
+    </resultMap>
+    <!-- 根据用户账号查找用户信息 -->
+    <select id="findByUsername" parameterType="string" resultMap="baseUserMap">
+        select * from user where user_account = #{userAccount}
+    </select>
+    <!-- 插入一条用户信息 -->
+    <insert id="insertOneUser" parameterType="User">
+        insert into user values (#{userId},#{userAccount},#{userPassword},#{userName},#{passwordSalt},
+                                 #{userGender},#{userPhone},#{userBirthday},#{registeTime},0,
+                                 #{passFace,typeHandler=com.lianwei.handler.ListJsonTypeHandler},#{nowFace})
+    </insert>
+    <!-- 通过用户id查询用户信息 -->
+    <select id="findUserByUserId" parameterType="integer" resultMap="baseUserMap">
+        select * from user where user_id = #{userId}
+    </select>
+    <!--  修改用户信息 -->
+    <update id="updateUserInfo" parameterType="UserVO">
+        update user 
+        <set>
+            <if test="userPassword != null">
+                user_password = #{userPassword},
+            </if>
+            <if test="userName != null">
+                user_Name = #{userName},
+            </if>
+            <if test="userGender != null">
+                user_gender = #{userGender},
+            </if>
+            <if test="userPhone != null">
+                user_phone = #{userPhone},
+            </if>
+            <if test="userBirthday != null">
+                user_birthday = #{userBirthday},
+            </if>
+            <if test="passFace != null">
+                pass_face = #{passFace,typeHandler=com.lianwei.handler.ListJsonTypeHandler},
+            </if>
+            <if test="nowFace != null">
+                now_face = #{nowFace},
+            </if>
+        </set>
+        where user_id = #{userId}
+    </update>
+</mapper>

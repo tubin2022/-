@@ -1,0 +1,45 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/logistics?characterEncoding=utf8&serverTimezone=Asia/Shanghai
+    username: root
+    password: 123456
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  kafka:
+    bootstrap-servers: master:9092,slave1:9092,slave2:9092
+    producer:
+      #系列化方式
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      #采用的ack机制
+      acks: 1
+      #批量提交的数据大小 16kb
+      batch-size: 16384
+      #生产者暂存数据的缓冲区大小
+      buffer-memory: 33554432
+mybatis:
+  type-aliases-package: com.lianwei.domain
+  mapper-locations: classpath:mapper/*Mapper.xml
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+server:
+  port: 8088
+
+#ftp配置 文件上传(上传到远程服务器)
+ftp:
+  #ftp所在主机ip或主机名
+  host: 192.168.100.182
+  #ftp端口号
+  port: 21
+  #ftp请求的用户名
+  username: ftp2
+  #ftp请求的密码
+  password: 123456
+  #ftp根路径
+  basePath: /www

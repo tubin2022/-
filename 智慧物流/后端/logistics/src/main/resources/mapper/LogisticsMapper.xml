@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lianwei.dao.LogisticsDao">
+    <resultMap id="baseLogisticsMap" type="Logistics">
+        <result column="send_address" property="sendAddress" typeHandler="com.lianwei.handler.ListJsonTypeHandler"></result>
+        <result column="receive_address" property="receiveAddress" typeHandler="com.lianwei.handler.ListJsonTypeHandler"></result>
+        <result column="pass_addresses" property="passAddresses" typeHandler="com.lianwei.handler.ListJsonTypeHandler"></result>
+        <result column="pass_time" property="passTime" typeHandler="com.lianwei.handler.ListJsonTypeHandler"></result>
+        <result column="dispatch_user_id" property="dispatchUserId" typeHandler="com.lianwei.handler.ListJsonTypeHandler"></result>
+    </resultMap>
+    <resultMap id="logisticsMap" type="UserLogisticsDTO" extends="baseLogisticsMap">
+        <result column="logistics_id" property="logisticsId"/>
+        <result column="logistics_number" property="logisticsNumber"/>
+        <result column="logistics_type" property="logisticsType"/>
+        <result column="send_user_id" property="sendUserId"/>
+        <result column="receive_user_name" property="receiveUserName"/>
+        <result column="receive_user_phone" property="receiveUserPhone"/>
+        <result column="logistics_status" property="logisticsStatus"/>
+        <result column="send_time" property="sendTime"/>
+        <result column="receive_time" property="receiveTime"/>
+        <result column="weight" property="weight"/>
+        <result column="cost" property="cost"/>
+        <result column="dispatch_company" property="dispatchCompany"/>
+        <association property="sendUser" javaType="User">
+            <id column="send_user_id" property="userId"/>
+            <result column="user_account" property="userAccount"/>
+            <result column="user_name" property="userName"/>
+            <result column="user_phone" property="userPhone"/>
+            <result column="user_gender" property="userGender"/>
+        </association>
+    </resultMap>
+    <!-- 添加一条物流信息 -->
+    <insert id="insertOneLogisticsInfo" parameterType="Logistics">
+        insert into logistics
+        values(#{logisticsId},#{logisticsNumber},#{logisticsType},#{sendUserId},
+               #{dispatchUserId,typeHandler=com.lianwei.handler.ListJsonTypeHandler},
+               #{receiveUserName},#{receiveUserPhone},
+               #{sendAddress,typeHandler=com.lianwei.handler.ListJsonTypeHandler},
+               #{receiveAddress,typeHandler=com.lianwei.handler.ListJsonTypeHandler},
+               #{passAddresses,typeHandler=com.lianwei.handler.ListJsonTypeHandler},
+               #{logisticsStatus},#{sendTime},
+               #{receiveTime},#{weight},#{cost},#{dispatchCompany},
+               #{passTime,typeHandler=com.lianwei.handler.ListJsonTypeHandler})
+    </insert>
+    <!-- 根据物流id修改物流信息 -->
+    <update id="updateLogisticsInfo" parameterType="Logistics">
+        update logistics
+        <set>
+            <if test="dispatchUserId != null">
+                dispatch_user_id = #{dispatchUserId,typeHandler=com.lianwei.handler.ListJsonTypeHandler},
+            </if>
+            <if test="passAddresses != null">
+                pass_addresses = #{passAddresses,typeHandler=com.lianwei.handler.ListJsonTypeHandler},
+            </if>
+            <if test="logisticsStatus != null">
+                logistics_status = #{logisticsStatus},
+            </if>
+            <if test="passTime != null">
+                pass_time = #{passTime,typeHandler=com.lianwei.handler.ListJsonTypeHandler},
+            </if>
+            <if test="receiveTime != null">
+                receive_time = #{receiveTime}
+            </if>
+        </set>
+        where logistics_id = #{logisticsId}
+    </update>
+
+    <!-- 根据物流id查询物流信息 -->
+    <select id="findLogisticsById" parameterType="integer" resultMap="baseLogisticsMap">
+        select * from logistics where logistics_id = #{logisticsId}
+    </select>
+
+    <!-- 根据条件分页查询物流信息 -->
+    <sql id="selectId">
+        <where>
+            l.send_user_id = u.user_id
+            <if test="logisticsId != null">
+                and logistics_id = #{logisticsId}
+            </if>
+            <if test="logisticsNumber != null">
+                and logistics_number = #{logisticsNumber}
+            </if>
+            <if test="receiveUserName != null">
+                and receive_user_name = #{receiveUserName}
+            </if>
+            <if test="receiveUserPhone != null">
+                and receive_user_phone = #{receiveUserPhone}
+            </if>
+            <if test="receiveAddress != null">
+                <bind name="likeReceiveAddress" value="'%'+receiveAddress+'%'"/>
+                and receive_address like #{likeReceiveAddress}
+            </if>
+            <if test="logisticsStatus != null">
+                and logistics_status = #{logisticsStatus}
+            </if>
+            <if test="sendUserId != null">
+                and send_user_id = #{sendUserId}
+            </if>
+        </where>
+    </sql>
+    <select id="pageQueryLogistics" parameterType="SelectLogisticsVO" resultMap="logisticsMap">
+        select * from logistics l,user u
+        <include refid="selectId"></include>
+        <if test="pageSize != null and pageNum != null">
+            <bind name="start" value="(pageNum - 1)*pageSize"/>
+            limit #{start},#{pageSize}
+        </if>
+    </select>
+
+    <!-- 根据条件查询记录总数 -->
+    <select id="count" parameterType="SelectLogisticsVO" resultType="int">
+        select count(1) from logistics l,user u
+        <include refid="selectId"></include>
+    </select>
+</mapper>
