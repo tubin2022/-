@@ -1,0 +1,49 @@
+<view class="search">
+    <view class="searchResult">
+        <block wx:for="{{searchResult}}" wx:key="item.id">
+            <van-card price="{{item.price}}">
+                <view slot="title">
+                    <view class="title" bindtap="toProductDetalPage" data-product="{{item}}">{{item.name}}</view>
+                </view>
+                <view slot="thumb">
+                    <van-image width="80" height="80" src="{{item.photo}}" radius="5" bindtap="toProductDetalPage" data-product="{{item}}"/>
+                </view>
+                <view slot="desc">
+                    <view class="descripption" bindtap="toProductDetalPage" data-product="{{item}}">{{item.description}}</view>
+                </view>
+                <view slot="tags">
+                    <van-tag type="warning">{{item.status}}</van-tag>
+                </view>
+                <view slot="footer">
+                    <van-button size="mini" type="primary">购买</van-button><text>\t\t\t</text>
+                    <van-button size="mini" type="info" bindtap="addCart" data-product="{{item}}">添加购物车</van-button>
+                </view>
+            </van-card>
+            <view style="height: 15px;"></view>
+        </block>
+    </view>
+    <view class="other">
+        <van-divider contentPosition="left">相似商品</van-divider>
+        <block wx:for="{{otherProduct}}" wx:key="item.id">
+            <van-card price="{{item.price}}">
+                <view slot="title">
+                    <view class="title" bindtap="toProductDetalPage" data-product="{{item}}">{{item.name}}</view>
+                </view>
+                <view slot="thumb">
+                    <van-image width="80" height="80" src="{{item.photo}}" radius="5" bindtap="toProductDetalPage" data-product="{{item}}"/>
+                </view>
+                <view slot="desc">
+                    <view class="descripption" bindtap="toProductDetalPage" data-product="{{item}}">{{item.description}}</view>
+                </view>
+                <view slot="tags">
+                    <van-tag type="warning">{{item.status}}</van-tag>
+                </view>
+                <view slot="footer">
+                    <van-button size="mini" type="primary">购买</van-button><text>\t\t\t</text>
+                    <van-button size="mini" type="info" bindtap="addCart" data-product="{{item}}">添加购物车</van-button>
+                </view>
+            </van-card>
+            <view style="height: 15px;"></view>
+        </block>
+    </view>
+</view>

@@ -1,0 +1,7 @@
+var jsonToString = function(json){
+    var str = JSON.stringify(json);
+    return str;
+}
+module.exports = {
+    jsonToString:jsonToString
+}

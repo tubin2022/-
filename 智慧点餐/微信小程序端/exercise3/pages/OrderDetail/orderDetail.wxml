@@ -1,0 +1,41 @@
+<wxs module="dateFilter" src="../../filter/fmtDate.wxs"></wxs>
+<view class="orderDetail">
+    <van-divider contentPosition="left" customStyle="color: #1989fa; border-color: #1989fa; font-size: 18px;">
+        订单信息
+    </van-divider>
+    <view class="orderInfo">
+        <view class="order">
+            <view style="color: red; font-size: 18px;"><text>{{orderData.status}}</text></view>
+            <view><text>下单日期:{{dateFilter.formatTime(orderData.orderTime,'Y-M-D h:m')}}</text></view>
+        </view>
+        <view class="recevie">
+            <view><text>收货人:{{orderData.address.realname}}</text></view>
+            <view><text>联系电话:{{orderData.address.telephone}}</text></view>
+            <view><text>收获地址:{{orderData.address.province + orderData.address.city + orderData.address.area}}</text></view>
+        </view>
+    </view>
+    <van-divider contentPosition="left" customStyle="color: #1989fa; border-color: #1989fa; font-size: 18px;">
+        商品信息
+    </van-divider>
+    <view class="orderProducts">
+        <view class="productsCard">
+            <van-card wx:for="{{orderData.orderLines}}" wx:key="item.id" num="{{item.num}}" price="{{item.price}}" title="{{item.name}}" thumb="{{ item.product.photo }}">
+                <view slot="desc">
+                    <view class="desc">{{item.product.description}}</view>
+                </view>
+            </van-card>
+        </view>
+        <view class="totalPrice">
+            <view><text>商品数量:{{count}}</text></view>
+            <view>总计:<text style="color: red;">￥{{orderData.total}}</text></view>
+        </view>
+    </view>
+
+    <view class="tabbar">
+        <van-tabbar>
+            <van-tabbar-item>
+                <van-button type="danger" round bindtap="toOrderPage">确认订单</van-button>
+            </van-tabbar-item>
+        </van-tabbar>
+    </view>
+</view>

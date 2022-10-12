@@ -1,0 +1,34 @@
+<wxs module="dateFilter" src="../../filter/fmtDate.wxs"></wxs>
+<view class="empty" wx:if="{{empty}}">
+    <van-empty description="您还没登录,请先登录再查看我的订单">
+        <van-button radius="5" type="info" class="bottom-button" bindtap="login">去登录</van-button>
+    </van-empty>
+</view>
+<view class="myOrder" wx:else>
+    <!-- 顶部标签栏 -->
+    <view class="tabs">
+        <van-tabs swipeable active="{{ active }}"  bind:click="onClick">
+            <van-tab title="{{item}}" wx:for="{{tabsArr}}">
+                <view class="orderCard" wx:for="{{orderList}}" wx:for-item="order" wx:key="order.id">
+                    <van-row>
+                        <van-col span="11"><text style="color: darkgrey;">{{dateFilter.formatTime(order.orderTime,'Y-M-D h:m')}}</text></van-col>
+                        <van-col span="12" offset="1">
+                            <text style="font-size: 13px;">{{order.address.province +order.address.city+order.address.area}}</text>
+                        </van-col>
+                    </van-row>
+                    <van-card num="{{order.orderLines.length}}" tag="{{order.status}}" price="{{order.total}}" title="{{order.orderLines[0].name}}">
+                        <view slot="thumb">
+                            <van-image width="85" height="85" src="{{order.orderLines[0].product.photo}}" />
+                        </view>
+                        <view slot="desc">
+                            <view class="orderDesc">{{order.orderLines[0].product.description}}</view>
+                        </view>
+                        <view slot="footer">
+                            <van-button size="mini" round color="#44A7DF" bindtap="toOrderDetailPage" data-order="{{order}}">查看详情</van-button>
+                        </view>
+                    </van-card>
+                </view>
+            </van-tab>
+        </van-tabs>
+    </view>
+</view>

@@ -1,0 +1,44 @@
+/* pages/Me/me.wxss */
+.me{
+    width: 90%;
+    margin: 0 auto;
+    margin-top: 25px;
+}
+.me .userface{
+    width: 100%;
+}
+.me .userface .username{
+   font-size: larger;
+   font-weight: bold;
+}
+.me .tools{
+    width: 100%;
+}
+.me .tools .myInfo{
+    width: 100%;
+    border: 1px solid;
+    border-radius: 5px;
+    height: 70px;
+   border-bottom-left-radius: 50%;
+   border-bottom-right-radius: 50%;
+   background-image: linear-gradient(#00c6ff,#0073ff);
+   line-height: 45px;
+}
+.others{
+    background-color: #ebecec;
+    width: 100%;
+}
+.others .logout{
+    line-height: 40px;
+    background-color: white;
+    height: 40px;
+    color: red;
+    text-align: center;
+    border-bottom: 1px solid white;
+}
+.wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }

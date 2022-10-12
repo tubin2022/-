@@ -1,0 +1,21 @@
+/* pages/OrderDetail/orderDetail.wxss */
+.orderDetail .orderInfo,.orderProducts{
+    margin: 0 auto;
+    width: 80%;
+}
+.orderDetail .orderInfo .order,.recevie{
+    font-size: 16px;
+    color: rgb(190, 186, 186);
+    text-align: left;
+}
+.orderDetail .orderProducts .totalPrice{
+    font-size: 16px;
+    color: rgb(190, 186, 186);
+    text-align: right;
+}
+.desc{
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+}

@@ -1,0 +1,17 @@
+<view class="userInfo">
+    <view class="userCeil">
+        <van-cell-group>
+            <van-cell title="头像" is-link center>
+                <view class="Img">
+                    <van-image width="70" height="70" src="{{userInfo.userFace}}" radius="5"/>
+                </view>
+            </van-cell>
+            <van-cell title="名字" value="{{userInfo.realname}}" is-link center/>
+            <van-cell title="用户账号" value="{{userInfo.username}}" is-link center/>
+            <van-cell title="手机号码" value="{{userInfo.telephone}}" is-link center/>
+            <van-cell title="更多信息" is-link center/>
+        </van-cell-group>
+        <view style="height: 20px;"></view>
+        <van-cell title="我的地址" is-link center bindtap="toLocationPage"/>
+    </view>
+</view>

@@ -1,0 +1,22 @@
+/* pages/MyCart/myCart.wxss */
+page{
+    background-color: #F0F0F0;
+}
+.myCartInfo{
+    background-color: white;
+}
+.info{
+    border-bottom: 0.5px solid #F0F0F0;
+}
+.productDesc{
+    font-size: 13px;
+    color: rgb(204, 203, 203);
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+}
+.price{
+    text-align: right;
+    width: 60px;
+}

@@ -1,0 +1,54 @@
+<view class="location">
+    <!-- 地址卡片信息 -->
+    <view class="myAddress" wx:for="{{allAddress}}" wx:key="item.id">
+        <block>
+            <view class="myLocation">
+                <van-swipe-cell right-width="{{ 65 }}" left-width="{{ 0 }}">
+                    <view class="address">
+                        <view class="nameAndPhone">
+                            <van-row>
+                                <van-col span="4" offset="2">{{item.realname}}</van-col>
+                                <van-col span="6" offset="1">{{item.telephone}}</van-col>
+                                <van-col span="6" offset="5">
+                                    <view class="edit">
+                                        <view style="color:#83C2CE" class="edit" bindtap="editAddress" data-address="{{item}}">编辑</view>
+                                    </view>
+                                </van-col>
+                            </van-row>
+                        </view>
+                        <view class="addressText">
+                            <van-row>
+                                <van-col span="15" offset="2">{{item.province + item.city + item.area}}</van-col>
+                            </van-row>
+                        </view>
+                    </view>
+                    <view slot="right">
+                        <van-button type="danger" bindtap="deleteAddress" data-address="{{item}}">删除</van-button>
+                    </view>
+                </van-swipe-cell>
+            </view>
+            <view style="height: 10px;"></view>
+        </block>
+
+    </view>
+    <!-- 底部tabbar -->
+    <view class="tabbar">
+        <van-tabbar bind:change="onChange">
+            <van-tabbar-item icon="plus" color="red" bindtap="addAddress">新增地址</van-tabbar-item>
+        </van-tabbar>
+    </view>
+
+    <!-- 动作面板 -->
+    <van-action-sheet show="{{ showActionSheet }}" title="{{title}}" bind:close="onClose" cancel-text="{{text}}" bind:cancel="confirm">
+        <view class="editArea" wx:if="{{show == 0}}">
+            <van-area area-list="{{ areaList }}" confirm-button-text="下一步" title="编辑地址" bind:confirm="next" bind:cancel="cancel" />
+        </view>
+        <view class="editNameAndPhone" wx:if="{{show == 1}}">
+            <van-cell-group>
+                <van-field model:value="{{ realname }}" label="名字" placeholder="请输入您的名字" border="{{ true }}" clearable />
+                <van-field model:value="{{ telephone }}" label="电话号码" placeholder="请输入您的电话号码" border="{{ true }}" clearable 
+                 type="number" maxlength="11"/>
+            </van-cell-group>
+        </view>
+    </van-action-sheet>
+</view>

@@ -1,0 +1,96 @@
+<view class="home">
+  <!-- 顶部位置栏、搜索栏 -->
+  <view class="navBar">
+    <van-row>
+      <van-col span="8">
+        <!-- 左部位置栏 -->
+        <view class="location">
+          <van-icon name="location-o" color="#48C6FE" bindtap="toLocation"/>
+          <view style="font-size: 12px;">{{location}}</view>
+        </view>
+      </van-col>
+      <van-col span="16">
+        <!-- 右部搜索栏 -->
+        <view class="search">
+          <van-search model:value="{{ searchInfo }}" placeholder="鲜榨西瓜汁" use-action-slot shape="round" use-right-icon-slot>
+            <view slot="action" bind:tap="search" class="searchButton" >搜索</view>
+            <view slot="right-icon">
+              <van-icon name="scan" />
+            </view>
+          </van-search>
+        </view>
+      </van-col>
+    </van-row>
+  </view>
+  <!-- 轮播图 -->
+  <view class="swipper">
+    <swiper next-margin="120">
+      <swiper-item wx:for="{{swipperData}}" wx:for-item="swipper" wx:key="swipper.id">
+        <van-image width="90%" height="90%" src="{{swipper.url}}" radius="5" />
+      </swiper-item>
+    </swiper>
+  </view>
+  <!-- 菜单栏，一部分展示grid，下面展示会员广告-->
+  <view class="category">
+    <view class="up">
+      <van-grid>
+        <van-grid-item icon="{{item.icon}}" text="{{item.name}}" wx:for="{{categoryData}}" wx:key="item.id" bindtap="toProductList" data-category="{{item}}"/>
+        <van-grid-item icon="apps-o" text="更多" bindtap="moreAction" data-category="1"/>
+      </van-grid>
+    </view>
+    <view class="down">
+      <image src="/images/vip.png" bindtap="toRegisterPage"></image>
+    </view>
+  </view>
+  <!-- 产品展示 -->
+  <view class="products">
+    <view class="text">
+      <van-row>
+        <van-col span="8" offset="2">
+          <text>本周热销<text class="topProduct">TOP10</text></text>
+        </van-col>
+        <van-col span="2" offset="10">
+          <van-icon name="cart" size="45px" color="grey" info="{{cartCount}}" bindtap="toMyCartPage"/>
+        </van-col>
+      </van-row>
+    </view>
+    <view class="productList">
+      <van-row wx:for="{{productData}}" wx:for-item="products" wx:key="*this">
+        <van-col span="8" offset="2">
+          <view class="product">
+            <view class="productImg">
+              <van-image width="100" height="100" round src="{{products[0].photo}}" bindtap="toProductDetalPage" data-product="{{products[0]}}"/>
+            </view>
+            <view class="productName">
+              <text style="font-size: 15px;" bindtap="toProductDetalPage" data-product="{{products[0]}}">{{products[0].name}} </text>
+              <text bindtap="toProductDetalPage" data-product="{{products[0]}}">{{products[0].description}}</text>
+            </view>
+            <view>
+              <text style="color: red;font-size: 12px;">价格￥{{products[0].price}}</text>
+              <view style="float: right;">
+                <van-icon name="shopping-cart" color="#31D2FE" size="23px" bindtap="addCart" data-product="{{products[0]}}"/>
+              </view>
+            </view>
+          </view>
+        </van-col>
+        <van-col span="8" offset="3">
+          <view class="product">
+            <view class="productImg">
+              <van-image width="100" height="100" round src="{{products[1].photo}}" bindtap="toProductDetalPage" data-product="{{products[1]}}"/>
+            </view>
+            <view class="productName">
+              <text style="font-size: 15px;" bindtap="toProductDetalPage" data-product="{{products[1]}}">{{products[1].name}} </text>
+              <text bindtap="toProductDetalPage" data-product="{{products[1]}}">{{products[1].description}}</text>
+            </view>
+            <view>
+              <text style="color: red;font-size: 12px;">价格￥9.9</text>
+              <view style="float: right;">
+                <van-icon name="shopping-cart" color="#31D2FE" size="23px" bindtap="addCart" data-product="{{products[1]}}"/>
+              </view>
+            </view>
+          </view>
+        </van-col>
+      </van-row>
+    </view>
+  </view>
+</view>

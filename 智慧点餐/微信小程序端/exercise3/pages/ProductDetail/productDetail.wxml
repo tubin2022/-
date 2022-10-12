@@ -1,0 +1,32 @@
+<view class="productDetail">
+    <view class="productImg">
+        <van-image width="220" height="220" round src="{{productData.photo}}" />
+    </view>
+    <view class="productName">
+        <text style="color: orange;">[{{productData.status}}]</text>{{productData.name}}
+    </view>
+    <view class="productDesc">
+        <van-collapse accordion value="{{ activeName }}" bind:change="onChange">
+            <van-collapse-item name="1">
+                <view slot="title"><view class="desc"> {{productData.description}}</view></view>
+                {{productData.description}}
+            </van-collapse-item>
+        </van-collapse>
+    </view>
+    <view class="productPrice">
+    ￥{{productData.price}} <text style="color: rgb(192, 189, 189); font-size: 15px;">门市价：￥{{productData.price +10}}</text>
+    </view>
+    <view class="activity">
+        <view class="border">
+            <view class="activityTime">活动时间:永久有效</view>
+            <view class="context"><van-tag type="warning">新人活动</van-tag>新用户下单可免费领取10元红包</view>
+            <view class="explain">(若您不是新用户,活动失效)</view>
+        </view>
+    </view>
+    <view class="tabbar">
+        <view class="button">
+            <view class="left"><van-icon name="shopping-cart" size="25"/></view>
+            <view class="right">加入购物车</view>
+        </view>
+    </view>
+</view>

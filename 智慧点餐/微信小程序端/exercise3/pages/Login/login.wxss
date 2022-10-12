@@ -1,0 +1,28 @@
+/* pages/Login/login.wxss */
+.login{
+    width: 100%;
+    height: 100vh;
+    background-image: linear-gradient(#50C9C3,#96DEDA);
+}
+.login .form{
+    position: absolute;
+    margin-top: 250px;
+    margin-left: 5%;
+    width: 90%;
+    height: 145px;
+    text-align: center;
+    background-color: white;
+    border: 1px solid;
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px black;
+}
+.login .form .nameAndPassword{
+    margin-top: 10px;
+}
+.register{
+    position: absolute;
+    margin-top: 220px;
+    margin-left: 7%;
+    font-size: 25px;
+    font-weight: bold;
+}

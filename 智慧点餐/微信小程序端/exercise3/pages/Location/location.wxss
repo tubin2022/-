@@ -1,0 +1,33 @@
+/* pages/Location/location.wxss */
+page{
+    background-color: rgb(245, 241, 241);
+}
+.location{
+    width: 100%;
+    height: 100%;
+}
+.location .myAddress{
+    width: 100%;
+    height: 100%;
+}
+.location .myAddress .myLocation{
+    background-color: white;
+    touch-action: none;
+}
+.location .myAddress .address{
+    border-bottom: 1px solid rgb(228, 226, 226);
+}
+.location .myAddress .address .nameAndPhone{
+    font-size: 15px;
+    font-weight: bold;
+}
+.location .myAddress .address .nameAndPhone .edit{
+    height: 36px;
+    text-align: center;
+    line-height: 36px;
+    font-size: 17px;
+}
+.location .myAddress .address .addressText{
+    font-size: 16px;
+    color:rgb(175, 172, 172);
+}

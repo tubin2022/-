@@ -1,0 +1,37 @@
+.home .navBar .location{
+    text-align: center;
+}
+.home .swipper{
+    text-align: center;
+}
+.topProduct{
+    font-size: large;
+    color: orange;
+}
+.searchButton{
+    border: 1px solid #B7F4F6;
+    border-radius: 5px;
+    background-color: #31D4FE;
+}
+.product{
+    width: 150px;
+    box-shadow: 5px 5px 10px #bcbdbd;
+}
+.product .productImg{
+    text-align: center
+}
+.product .productName{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 10px;
+}
+.home .category .down {
+    text-align: center;
+    width: 100%;
+}
+.home .category .down image{
+    width: 90%;
+    height: 170px;
+}
+

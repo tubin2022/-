@@ -1,0 +1,37 @@
+<view class="register">
+    <view class="step">
+        <van-steps steps="{{ steps }}" active="{{ active }}" active-color="#38f"/>
+    </view>
+    <view class="form_1" wx:if="{{active == 0}}">
+        <view class="identify">
+            <view class="code">{{code}}</view>
+            <van-cell-group>
+                <van-field model:value="{{ inputCode }}" label="验证码" placeholder="请输入验证码" border="{{ true }}" clearable error-message="{{errMessage}}"/>
+            </van-cell-group>
+        </view>
+        <van-button type="primary" bindtap="next">下一步</van-button>
+    </view>
+    <view class="form_1" wx:if="{{active == 1}}">
+        <view class="nameAndPassword">
+            <van-cell-group>
+                <van-field model:value="{{ username }}" label="用户名" placeholder="请输入用户名" border="{{ true }}" clearable error="{{errorName}}" bind:change="onChangeName" />
+                <van-field model:value="{{ password }}" label="密码" placeholder="请输入密码" border="{{ true }}" clearable error="{{errorPassword}}" bind:change="onChangePassword" type="password" />
+            </van-cell-group>
+        </view>
+        <van-button type="primary" bindtap="previous">上一步</van-button><text>\t\t\t\t\t</text>
+        <van-button type="primary" bindtap="next_1">下一步</van-button>
+    </view>
+    <view class="form_2" wx:if="{{active == 2}}">
+        <view class="nameAndPassword">
+            <van-cell-group>
+                <van-field model:value="{{ realname }}" label="真实姓名" placeholder="请输入您的真实姓名" border="{{ true }}" clearable  />
+                <van-field model:value="{{ telephone }}" label="电话号码" placeholder="请输入您的电话号码" border="{{ true }}" clearable  />
+                <van-field model:value="{{ gender }}" label="性别" placeholder="请输入您的性别" border="{{ true }}" clearable  />
+                <van-field model:value="{{ address }}" label="地址" placeholder="请输入您的地址" border="{{ true }}" clearable  />              
+            </van-cell-group>
+        </view>
+        <van-button type="primary" bindtap="previous_1">上一步</van-button><text>\t\t\t\t\t</text>
+        <van-button type="primary" bindtap="register">注册</van-button><text>\t\t\t\t\t</text>
+        <van-button type="primary" bindtap="register">直接注册</van-button>
+    </view>
+</view>

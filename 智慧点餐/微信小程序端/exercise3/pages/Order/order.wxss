@@ -1,0 +1,16 @@
+/* pages/Order/order.wxss */
+.myOrder .tabs .orderCard{
+    width: 80%;
+    border: 1px solid;
+    box-shadow:  5px 5px 10px #a5a4a4;
+    margin: 0 auto;
+    margin-top: 7px;
+    border-radius: 5px;
+}
+.orderDesc{
+    color: rgb(128, 126, 126);
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
+    overflow: hidden;
+}

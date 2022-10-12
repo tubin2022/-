@@ -1,0 +1,22 @@
+/* pages/search/search.wxss */
+.search .searchResult .van-card{
+    margin-top: 20px;
+    width: 90%;
+    margin: 0 auto;
+}
+.search .other{
+    width: 90%;
+    margin: 0 auto;
+}
+.search{
+    height: 100%;
+    background-color: rgb(226, 222, 222);
+}
+.descripption{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.title{
+    font-weight: bold;
+}

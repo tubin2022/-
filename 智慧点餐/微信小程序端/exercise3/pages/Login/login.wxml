@@ -1,0 +1,13 @@
+<view class="login">
+    
+    <view class="register" bindtap="toRegisterPage">添加账号</view>
+    <view class="form">
+        <view class="nameAndPassword">
+            <van-cell-group>
+                <van-field model:value="{{ username }}" label="用户名" placeholder="请输入用户名" border="{{ true }}" clearable error="{{errorName}}" bind:change="onChangeName" />
+                <van-field model:value="{{ password }}" label="密码" placeholder="请输入密码" border="{{ true }}" clearable error="{{errorPassword}}" bind:change="onChangePassword" type="password" />
+            </van-cell-group>
+        </view>
+        <van-button type="primary" bindtap="login">安全登录</van-button>
+    </view>
+</view>

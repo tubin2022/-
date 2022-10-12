@@ -1,0 +1,90 @@
+{
+    "usingComponents": {
+        "van-button": "@vant/weapp/button/index",
+        "van-icon": "@vant/weapp/icon/index",
+        "van-search": "@vant/weapp/search/index",
+        "van-row": "@vant/weapp/row/index",
+        "van-col": "@vant/weapp/col/index",
+        "van-image": "@vant/weapp/image/index",
+        "van-grid": "@vant/weapp/grid/index",
+        "van-grid-item": "@vant/weapp/grid-item/index",
+        "van-dropdown-menu": "@vant/weapp/dropdown-menu/index",
+        "van-dropdown-item": "@vant/weapp/dropdown-item/index",
+        "van-tab": "@vant/weapp/tab/index",
+        "van-tabs": "@vant/weapp/tabs/index",
+        "van-card": "@vant/weapp/card/index",
+        "van-cell": "@vant/weapp/cell/index",
+        "van-cell-group": "@vant/weapp/cell-group/index",
+        "van-tag": "@vant/weapp/tag/index",
+        "van-toast": "@vant/weapp/toast/index",
+        "van-field": "@vant/weapp/field/index",
+        "van-empty": "@vant/weapp/empty/index",
+        "van-divider": "@vant/weapp/divider/index",
+        "van-tabbar": "@vant/weapp/tabbar/index",
+        "van-tabbar-item": "@vant/weapp/tabbar-item/index",
+        "van-swipe-cell": "@vant/weapp/swipe-cell/index",
+        "van-sidebar": "@vant/weapp/sidebar/index",
+        "van-sidebar-item": "@vant/weapp/sidebar-item/index",
+        "van-checkbox": "@vant/weapp/checkbox/index",
+        "van-checkbox-group": "@vant/weapp/checkbox-group/index",
+        "van-stepper": "@vant/weapp/stepper/index",
+        "van-submit-bar": "@vant/weapp/submit-bar/index",
+        "van-overlay": "@vant/weapp/overlay/index",
+        "van-collapse": "@vant/weapp/collapse/index",
+        "van-collapse-item": "@vant/weapp/collapse-item/index",
+        "van-steps": "@vant/weapp/steps/index",
+        "van-action-sheet": "@vant/weapp/action-sheet/index",
+        "van-area": "@vant/weapp/area/index"
+    },
+    "pages": [
+        "pages/index/index",
+        "pages/logs/logs",
+        "pages/Me/me",
+        "pages/Order/order",
+        "pages/Message/message",
+        "pages/Login/login",
+        "pages/search/search",
+        "pages/Location/location",
+        "pages/ProductList/productList",
+        "pages/MyCart/myCart",
+        "pages/UserInfo/userInfo",
+        "pages/OrderDetail/orderDetail",
+        "pages/ProductDetail/productDetail",
+        "pages/Register/register"
+    ],
+    "window": {
+        "backgroundTextStyle": "light",
+        "navigationBarBackgroundColor": "#FFFFFF",
+        "navigationBarTitleText": "智慧点餐",
+        "navigationBarTextStyle": "black"
+    },
+    "tabBar": {
+        "list": [
+            {
+                "pagePath": "pages/index/index",
+                "text": "首页",
+                "iconPath": "/images/home.png",
+                "selectedIconPath": "/images/home-selected.png"
+            },
+            {
+                "pagePath": "pages/Message/message",
+                "text": "消息",
+                "iconPath": "/images/message.png",
+                "selectedIconPath": "/images/message-selected.png"
+            },
+            {
+                "pagePath": "pages/Order/order",
+                "text": "订单",
+                "iconPath": "/images/order.png",
+                "selectedIconPath": "/images/order-selected.png"
+            },
+            {
+                "pagePath": "pages/Me/me",
+                "text": "我",
+                "iconPath": "/images/me.png",
+                "selectedIconPath": "/images/me-selected.png"
+            }
+        ]
+    },
+    "sitemapLocation": "sitemap.json"
+}

@@ -1,0 +1,42 @@
+/* pages/Message/message.wxss */
+.myMessage .messageCard .card{
+    width: 80%;
+    border: 1px solid black;
+    border-radius: 5px;
+    margin: 0 auto;
+    box-shadow: 5px 5px 10px #DBD7D7;   
+}
+.myMessage .messageCard .card .header{
+    text-align: left;
+    border-bottom: 1px solid #DBD7D7;
+}
+.myMessage .messageCard .card .textBody{
+    text-align: justify;
+    border-bottom: 1px solid #DBD7D7;
+}
+.myMessage .messageCard .card .tail{
+    text-align:center;
+}
+.home .tool{
+    width: 100%;
+}
+.messageTime{
+    color: darkgray;
+}
+.messageTitle{
+    font-weight: bold;
+}
+.productNameAndDesc{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.orderDetail{
+    line-height: 30px;
+    color: rgb(161, 160, 160);
+    font-size: 12px;
+}
+.bottom-button {
+    width: 160px;
+    height: 40px;
+  }

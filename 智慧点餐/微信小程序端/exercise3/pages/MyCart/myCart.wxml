@@ -1,0 +1,43 @@
+<wxs module="toString" src="../../filter/jsonToString.wxs"></wxs>
+<view class="empty" wx:if="{{empty}}">
+    <van-empty class="custom-image" image="https://img.yzcdn.cn/vant/custom-empty-image.png" description="您的购物车空空如也" />
+</view>
+<view class="myCart" wx:else>
+    <view class="myCartInfo">
+        <van-checkbox-group value="{{ result }}" bind:change="onChange">
+            <van-checkbox name="{{item.id}}"  checked-color="red" wx:for="{{myCartInfo}}" wx:key="{{item.id}}" label-disabled  icon-size="28px">
+                <view class="info">
+                    <van-row>
+                        <van-col span="6">
+                            <view class="Img">
+                                <van-image width="80" height="80" src="{{item.photo}}" radius="5" />
+                            </view>
+                        </van-col>
+                        <van-col span="13" offset="1">
+                            <view class="product">
+                                <view class="productName" style="height: 20px;width: 160px;">{{item.name}}</view>
+                                <view class="productDesc" style="height: 40px; width: 160px;">{{item.description}}</view>
+                                <view class="steper" style="height: 30px; width: 190px;">
+                                    <van-stepper model:value="{{item.num}}" bind:change="stepOnChange" />
+                                </view>
+                            </view>
+                        </van-col>
+                        <van-col span="3" offset="1">
+                            <view class="price">
+                                <view class="productPrice" style="height: 40px;color: red;text-align: left;">￥{{item.price}}</view>
+                                <view class="icon" style="height: 40px;text-align: left;">
+                                    <van-icon name="delete-o" size="25px" />
+                                </view>
+                            </view>
+                        </van-col>
+                    </van-row>
+                </view>
+            </van-checkbox>
+        </van-checkbox-group>
+    </view>
+    <view class="submit">
+        <van-submit-bar price="{{ 3050 }}" button-text="结算" bind:submit="onClickButton" tip="{{ true }}">
+            <van-checkbox value="{{ checked }}" bind:change="checkAll">全选</van-checkbox>
+        </van-submit-bar>
+    </view>
+</view>

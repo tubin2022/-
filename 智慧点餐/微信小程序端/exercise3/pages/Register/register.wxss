@@ -1,0 +1,45 @@
+/* pages/Register/register.wxss */
+.step{
+    margin-top: 50px;
+}
+.form_1{
+    position: absolute;
+    margin-top: 90px;
+    margin-left: 5%;
+    width: 90%;
+    height: 160px;
+    text-align: center;
+    background-color: white;
+    border: 1px solid;
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px black;
+}
+.identify{
+    margin-top: 10px;
+}
+.code{
+    margin: 0 auto;
+    width: 85px;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    font-size: 25px;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    text-shadow: 0 -1px 0 rgb(166, 224, 31);
+    background-image: linear-gradient(#D3959B,#BFE6BA);
+}
+.nameAndPassword{
+    margin-top: 10px;
+}
+.form_2{
+    position: absolute;
+    margin-top: 90px;
+    margin-left: 5%;
+    width: 90%;
+    height: 235px;
+    text-align: center;
+    background-color: white;
+    border: 1px solid;
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px black;
+}

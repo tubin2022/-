@@ -1,0 +1,55 @@
+<wxs module="dateFilter" src="../../filter/fmtDate.wxs"></wxs>
+<view class="empty" wx:if="{{empty}}">
+    <van-empty description="您还没登录,请先登录再查看我的消息">
+        <van-button radius="5" type="info" class="bottom-button" bindtap="login">去登录</van-button>
+    </van-empty>
+</view>
+<view class="myMessage" wx:else>
+    <!-- 顶部工具栏 -->
+    <view class="tool">
+        <van-row>
+            <van-col span="6">
+                <van-dropdown-menu>
+                    <van-dropdown-item value="{{ value1 }}" options="{{ option1 }}" />
+                </van-dropdown-menu>
+            </van-col>
+        </van-row>
+
+    </view>
+    <!-- 消息卡片列表 -->
+    <view class="messageCard">
+        <block wx:for="{{orderMessage}}" wx:for-item="order" wx:key="order.id">
+            <view class="card">
+                <view class="incon" style="float: right;">
+                    <van-icon name="/images/readMessage.png" size="25px" dot />
+                </view>
+                <view class="header">
+                    <view class="messageTitle">订单通知</view>
+                    <view class="messageTime">{{dateFilter.formatTime(order.orderTime,'Y-M-D h:m')}}</view>
+                </view>
+                <view class="textBody">
+                    <view class="productMessage" style="background-color: rgb(229, 226, 226);">
+                        <van-row>
+                            <van-col span="5" offset="1">
+                                <van-image width="50" height="50" src="{{order.orderLines[0].product.photo}}" radius="5" />
+                            </van-col>
+                            <van-col span="15">
+                                <view class="productNameAndDesc">{{order.orderLines[0].name + order.orderLines[0].product.description}}</view>
+                                <view class="orderDetail">共计{{order.orderLines.length}}件商品 合计￥{{order.total}}</view>
+                            </van-col>
+                        </van-row>
+                    </view>
+                    <view class="userInfo">
+                        <view class="username">姓名:{{order.address.realname}}</view>
+                        <view class="userphone">电话:{{order.address.telephone}}</view>
+                        <view class="userAddress">地址：{{order.address.province}}{{order.address.city}}{{order.address.area}}</view>
+                    </view>
+                </view>
+                <view class="tail">
+                    <van-button size="small" color="#31D4FE" round bindtap="toOrderDetailPage" data-order="{{order}}">详情</van-button>
+                </view>
+            </view>
+            <view style="height: 20px;"></view>
+        </block>
+    </view>
+</view>

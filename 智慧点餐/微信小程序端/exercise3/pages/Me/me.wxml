@@ -1,0 +1,117 @@
+<view class="me">
+    <!-- 用户头像，用户名称 -->
+    <view class="userface">
+        <van-row>
+            <!-- 用户头像 -->
+            <van-col span="6">
+                <van-image width="80" height="80" src="{{user.userFace}}" round bindtap="privewImg" data-img="{{user.userFace}}" />
+            </van-col>
+            <!-- 用户名称 -->
+            <van-col span="8">
+                <view class="username" bindtap="toUserInfoDetail">{{username}}</view>
+            </van-col>
+        </van-row>
+    </view>
+    <!-- 用户信息，用户订单，优惠券 红包，积分-->
+    <view class="tools">
+        <view class="myInfo" bindtap="toUserInfoDetail">
+            <!--我的信息  -->
+            <van-row>
+                <van-col span="8">
+                    <view style="font-size: large;color: white;">我的信息</view>
+                </van-col>
+                <van-col span="8" offset="8">
+                    <view style="font-size: small; text-align: right; color: white;">查看全部
+                        <van-icon name="arrow" />
+                    </view>
+                </van-col>
+            </van-row>
+        </view>
+        <!-- 我的订单 优惠券，红包，积分-->
+        <view class="myOrder">
+            <van-cell-group inset>
+                <van-cell value="点击查看订单" is-link bindtap="toOrderPage">
+                    <view slot="title">
+                        <van-row>
+                            <van-col span="6">
+                                <image src="/images/searchOrder.png" style="height: 25px; width: 25px;"></image>
+                            </van-col>
+                            <van-col span="15">
+                                <view class="van-cell-text">我的订单</view>
+                            </van-col>
+                        </van-row>
+                    </view>
+                </van-cell>
+                <van-cell value="点击查看优惠券" is-link>
+                    <view slot="title">
+                        <van-row>
+                            <van-col span="6">
+                                <image src="/images/coupon.png" style="height: 25px; width: 25px;"></image>
+                            </van-col>
+                            <van-col span="15">
+                                <view class="van-cell-text">优惠券</view>
+                            </van-col>
+                        </van-row>
+                    </view>
+                </van-cell>
+                <van-cell value="点击我的红包" is-link>
+                    <view slot="title">
+                        <van-row>
+                            <van-col span="6">
+                                <image src="/images/redBag.png" style="height: 25px; width: 25px;"></image>
+                            </van-col>
+                            <van-col span="15">
+                                <view class="van-cell-text">红包</view>
+                            </van-col>
+                        </van-row>
+                    </view>
+                </van-cell>
+                <van-cell value="点击查看我的积分" is-link>
+                    <view slot="title">
+                        <van-row>
+                            <van-col span="6">
+                                <image src="/images/point.png" style="height: 25px; width: 25px;"></image>
+                            </van-col>
+                            <van-col span="15">
+                                <view class="van-cell-text">我的积分</view>
+                            </van-col>
+                        </van-row>
+                    </view>
+                </van-cell>
+            </van-cell-group>
+        </view>
+    </view>
+</view>
+<view class="others"></view>
+<!-- 遮罩层，预览头像 -->
+<van-overlay show="{{ show }}" bind:click="onClickHide">
+    <view class="wrapper">
+        <van-image width="200" height="200" src="{{user.userFace}}"/>
+    </view>
+</van-overlay>
+<!-- 其它功能 -->
+<view class="others">
+    <!-- 占位 -->
+    <view style="height: 20px;"></view>
+    <view class="vip">
+        <van-cell title="我的会员" value="查看会员" is-link />
+    </view>
+    <!-- 占位 -->
+    <view style="height: 20px;"></view>
+    <view class="problem">
+        <van-cell title="常见问题" is-link />
+        <van-cell title="联系客服" is-link />
+        <van-cell title="信息反馈" is-link />
+    </view>
+    <!-- 占位 -->
+    <view style="height: 20px;"></view>
+    <view class="phone">
+        <van-cell title="更换手机号" value="{{user.telephone}}" is-link />
+    </view>
+    <!-- 占位 -->
+    <view style="height: 20px;"></view>
+    <view>
+        <van-cell title="关于我们" is-link />
+        <view class="logout" bindtap="logout">退出登录</view>
+    </view>
+</view>

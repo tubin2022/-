@@ -1,0 +1,24 @@
+<view class="productList">
+    <view class="left">
+        <van-sidebar active-key="{{ activeKey }}" bind:change="onChange">
+            <van-sidebar-item title="{{item.name}}" wx:for="{{categoryData}}" wx:key="item.id" />
+        </van-sidebar>
+    </view>
+    <view class="right">
+        <van-card tag="{{item.status}}" price="{{item.price}}"  wx:for="{{productList}}" wx:key="item.id">
+            <view slot="title">
+                <view class="title" bindtap="toProductDetalPage" data-product="{{item}}">{{item.name}}</view>
+            </view>
+            <view slot="thumb">
+                <van-image width="80" height="80" src="{{item.photo}}" radius="5" bindtap="toProductDetalPage" data-product="{{item}}" />
+            </view>
+            <view slot="desc">
+                <view class="desc" bindtap="toProductDetalPage" data-product="{{item}}">{{item.description}}</view>
+            </view>
+            <view slot="footer">
+                <van-button size="mini" type="primary">购买</van-button><text>\t\t\t</text>
+                <van-button size="mini" type="info" bindtap="addCart" data-product="{{item}}">加入购物车</van-button>
+            </view>
+        </van-card>
+    </view>
+</view>

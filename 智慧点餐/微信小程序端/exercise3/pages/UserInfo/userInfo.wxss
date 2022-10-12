@@ -1,0 +1,4 @@
+/* pages/UserInfo/userInfo.wxss */
+page{
+    background-color: rgb(250, 245, 245);
+}
