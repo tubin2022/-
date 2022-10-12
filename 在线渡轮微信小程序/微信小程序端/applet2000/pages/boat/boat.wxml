@@ -1,0 +1,139 @@
+<!-- 自定义顶部导航栏 -->
+<navigation-bar title="购票" typei="0"></navigation-bar>
+<!-- 渡轮图片 -->
+<view class="Div">
+    <view style="height: 5px;"></view>
+    <view>   
+        <van-image width="320" height="200" fit="contain" src="{{shopping.boat.bphoto}}" />
+    </view>
+
+    <!-- 查询页面跳转 -->
+    <view wx:if="{{showOrder == 0}}">
+    <van-card class="cardInset" price="{{shopping.price}}">
+        <!-- 查询跳转 --> 
+            <view slot="title">
+                <span class="detailLabel">{{shopping.shift.startCity}}</span>
+                <span>
+                    <van-image width="50" height="12" fit="contain" src="/static/箭头.png" />
+                </span>
+                <span class="detailLabel">{{shopping.shift.endCity}}</span>
+            </view>
+            <!-- 时间描述 -->
+            <view slot="desc">
+            <view>
+                <span class="detailLabel">出发时间:</span>
+                <span style="margin-left:10px">{{shopping.shift.startTime}}</span>
+            </view>
+            <view>
+                <span class="detailLabel">到达时间:</span>
+                <span style="margin-left:10px">{{shopping.shift.endTime}}</span>
+            </view>
+            <view>
+                <span class="detailLabel">当前剩余</span>
+                <span style="margin-left:10px">{{shopping.surplus}}</span>
+                <span class="detailLabel">张</span>
+            </view>
+            </view>
+    </van-card>
+    </view>
+
+    <!-- 订单页面跳转 -->
+    <view wx:else> 
+        <van-card class="cardInset" price="{{shopping.price}}">
+                <view slot="title">
+                    <span class="detailLabel">{{shopping.startCity}}</span>
+                    <span>
+                        <van-image width="50" height="12" fit="contain" src="/static/箭头.png" />
+                    </span>
+                    <span class="detailLabel">{{shopping.endCity}}</span>
+                </view>
+       
+        
+        <!-- 时间描述 -->
+            <view slot="desc">
+                <view>
+                    <span class="detailLabel">出发时间:</span>
+                    <span style="margin-left:10px">{{shopping.startTime}}</span>
+                </view>
+                <view>
+                    <span class="detailLabel">到达时间:</span>
+                    <span style="margin-left:10px">{{shopping.endTime}}</span>
+                </view>
+                <view>
+                    <span class="detailLabel">乘坐人:</span>
+                    <span style="margin-left:10px">{{shopping.user.uname}}</span>
+                </view>
+
+            </view>
+      
+        
+        </van-card>
+    </view>
+
+
+    <!--  分割作用 -->
+    <view style="height: 5px"></view>
+    <!-- 详细信息 -->
+    <van-cell-group>
+        <van-cell use-label-slot>
+            <view slot="title">
+                <span class="custom-title">渡轮详情</span>
+            </view>
+            <view slot="label">
+                <view>
+                    <span class="detailLabel">渡轮名称:</span>
+                    <span style="margin-left:10px">{{shopping.boat.bname}}</span>
+                </view>
+                <view style="height: 5px"></view>
+                <span class="detailLabel">渡轮描述:</span>
+                <span style="margin-left:7px">{{shopping.boat.profile}}</span>
+                <view style="height: 5px"></view>
+            </view>
+        </van-cell>
+    </van-cell-group>
+    <!-- 分割 -->
+    <view style="height: 175rpx; background-color: #F0F0F0;"></view>
+    <!-- 底部船票导航 -->
+    <!-- 判断showOrder的值来决定底部购物导航的功能 -->
+    <view wx:if="{{showOrder == 0}}">
+        <van-goods-action>
+            <van-goods-action-icon icon="chat-o" text="反馈" bindtap="goFeedback" />
+            <van-goods-action-icon icon="bill-o" text="订单" url='/pages/order/order' link-type="switchTab" />
+            <van-goods-action-button text="立即购买" bindtap="openNum" />
+        </van-goods-action>
+    </view>
+    <view wx:elif="{{showOrder == 1}}">
+        <van-goods-action>
+            <van-goods-action-icon icon="chat-o" text="反馈" bindtap="goFeedback" />
+            <van-goods-action-icon icon="bill-o" text="订单" url='/pages/order/order' link-type="switchTab" />
+            <van-goods-action-button text="使用船票"  type="primary" bindtap="useTicket" />
+        </van-goods-action>
+    </view>
+    <view wx:else>
+        <van-goods-action>
+            <van-goods-action-icon icon="chat-o" text="反馈" bindtap="goFeedback" />
+            <van-goods-action-icon icon="bill-o" text="订单" url='/pages/order/order' link-type="switchTab" />
+            <van-goods-action-button  disabled color='#b2b2b2' type="primary" text="使用船票" />
+        </van-goods-action>
+    </view>
+    <!-- <van-goods-action>
+        <van-goods-action-icon icon="chat-o" text="反馈" bindtap="goFeedback" />
+        <van-goods-action-icon icon="bill-o" text="订单" url='/pages/order/order' link-type="switchTab" />
+        <van-goods-action-button text="立即购买" bindtap="openNum" />
+    </van-goods-action> -->
+</view>
+<!-- 确认购买改车票 -->
+<van-dialog use-slot title="购票" show="{{ buyShow }}" show-cancel-button bind:cancel="onClose" bind:confirm="buyTicket">
+    <van-field model:value="{{ num }}" clearable type="number" label="购票数量" placeholder="请输入购票数量" auto-focus input-align="right" bind:clear="clear" />
+</van-dialog>
+<!-- 二维码使用 -->
+<van-cell title="船票二维码" is-link bind:click="showPopup" />
+
+
+
+<van-popup show="{{ showCode }}" bind:close="closeCode"   closeable close-icon="close">
+    <!--显示图片用的标签-->
+    <image class="container-4-item-v-ewm" src="{{ewmImg}}"></image>
+    <!--创建一个画布，将它移出屏幕外看不到的地方-->
+    <canvas class="canvas-code" canvas-id="myQrcode"  style="background:#fff;width: 200px;height: 300px; display:block; left:-800rpx;position:absolute;"/>
+</van-popup>

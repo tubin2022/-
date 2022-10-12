@@ -1,0 +1,34 @@
+/* Components/navigation-bar/navigation-bar.wxss */
+    .nav_box {
+        position: fixed;
+        width: 100%;
+        font-size: 15px;
+        z-index: 999;
+        background-color:#51C4D3;
+      }
+      .navBar {
+        display: flex;
+        align-items: center;
+        padding: 0 10px;
+      }
+      
+      .content {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        text-align: center;
+      }
+      .title{    
+        width: 40%;
+        margin-left: 3%;
+        font-size: 30rpx;
+        text-align: center;
+      }
+      .left{
+          height: 60rpx;
+          width: 180rpx;
+          margin-left: 2%;
+      }
+      cover-image{
+          width: 35%;
+      }

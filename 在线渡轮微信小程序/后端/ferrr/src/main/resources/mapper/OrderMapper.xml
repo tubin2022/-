@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ecjtu.ferry.dao.OrderDao">
+    <insert id="addOrder" parameterType="Order">
+        insert into ticket values(null,#{uid},#{tid},#{price},#{startCity},#{endCity},#{startTime},#{endTime})
+    </insert>
+    <delete id="deleteOrder" parameterType="integer">
+        delete from ticket where t_id = #{oid}
+    </delete>
+    <select id="findById" parameterType="integer" resultMap="orderMap">
+        SELECT t.t_id oid,t.u_id uid,t.ticket_id tid,t.t_price price,t.start_city startCity,
+               t.end_city endCity,t.start_time startTime,t.arrive_time endTime,u.u_id uid,
+               u.u_name uname,u.u_phone phone,u.gender gender,u.email email,b.*
+        FROM ticket t,USER u,all_ticket AT,ferry_boat b
+        WHERE t.u_id = u.u_id AND t.ticket_id = at.ticket_id AND at.fb_id = b.fb_id
+        and t.t_id = #{oid}
+    </select>
+
+    <resultMap id="orderMap" type="OrderDTO">
+        <id property="oid" column="oid"/>
+        <result property="uid" column="uid"/>
+        <result property="tid" column="tid"/>
+        <result property="price" column="price"/>
+        <result property="startCity" column="startCity"/>
+        <result property="endCity" column="endCity"/>
+        <result property="startTime" column="startTime"/>
+        <result property="endTime" column="endTime"/>
+        <association property="user" column="uid">
+            <id property="uid" column="uid"/>
+            <result property="uname" column="uname"/>
+            <result property="phone" column="phone"/>
+            <result property="gender" column="gender"/>
+            <result property="email" column="email"/>
+        </association>
+        <association property="boat" column="fb_id">
+            <id property="bid" column="fb_id"/>
+            <result property="bname" column="fb_name"/>
+            <result property="produceDate" column="produce_date"/>
+            <result property="bphoto" column="fb_photo"/>
+            <result property="maxPeople" column="max_people"/>
+            <result property="profile" column="profile"/>
+        </association>
+    </resultMap>
+    <select id="pageQuery" parameterType="OrderVO" resultMap="orderMap">
+        SELECT t.t_id oid,t.u_id uid,t.ticket_id tid,t.t_price price,t.start_city startCity,
+        t.end_city endCity,t.start_time startTime,t.arrive_time endTime,u.u_id uid,
+        u.u_name uname,u.u_phone phone,u.gender gender,u.email email,b.*
+        FROM ticket t,USER u,all_ticket AT,ferry_boat b
+        WHERE t.u_id = u.u_id AND t.ticket_id = at.ticket_id AND at.fb_id = b.fb_id
+        <if test="uid != null and uid != 0">
+            and t.u_id = #{uid}
+        </if>
+        <if test="tid != null and tid != 0">
+            and t.ticket_id = #{tid}
+        </if>
+        <if test="startCity != null and startCity !=''">
+            and t.start_city like #{startCity}
+        </if>
+        <if test="startCity != null and startCity !=''">
+            and t.end_city like #{endCity}
+        </if>
+        <if test="status == '已完成'">
+            and t.start_time &lt; now()
+        </if>
+        <if test="status == '待出行'">
+            and t.start_time &gt; now()
+        </if>
+        limit #{pageNo},#{pageSize}
+    </select>
+
+    <select id="findAllCount" parameterType="OrderVO" resultType="int">
+        select count(*) from ticket t
+        <where>
+            <if test="uid != null and uid != 0">
+                and t.u_id = #{uid}
+            </if>
+            <if test="tid != null and tid != 0">
+                and t.ticket_id = #{tid}
+            </if>
+            <if test="startCity != null and startCity !=''">
+                and t.start_city like #{startCity}
+            </if>
+            <if test="startCity != null and startCity !=''">
+                and t.end_city like #{endCity}
+            </if>
+            <if test="status == '已完成'">
+                and t.start_time &lt; now()
+            </if>
+            <if test="status == '待出行'">
+                and t.start_time &gt; now()
+            </if>
+        </where>
+    </select>
+</mapper>

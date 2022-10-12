@@ -1,0 +1,28 @@
+<!-- 自定义顶部导航栏 -->
+<navigation-bar title="反馈" typei="0"></navigation-bar>
+<view class="Div">
+<!-- top标题 -->
+<view class="top">客户反馈</view>
+
+<!-- 提醒 -->
+<view wx:if="{{showT}}" class="tidAdvice">
+  <view>请填写你对于该航班的反馈与建议</view>
+</view>
+
+<!-- 留言区域 -->
+<van-cell-group>
+  <van-field
+    model: value="{{ message }}"
+    label="反馈信息"
+    type="textarea"
+    placeholder="请输入留言"
+    autosize
+    bind:change="getInput"
+  />
+</van-cell-group>
+
+
+    <view class="btn">
+      <van-button round type="primary"bindtap="feedback" size="large">提交反馈</van-button>
+    </view>
+  </view>

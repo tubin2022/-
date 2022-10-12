@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ecjtu.ferry.dao.UserDao">
+    <insert id="addUser" parameterType="User">
+        insert into user values(null,#{uname},#{password},#{phone},#{gender},#{email},#{userface})
+    </insert>
+    <select id="findByPhone" parameterType="string" resultType="User">
+        select u_id uid,u_name uname,u_password password,u_phone phone,gender,email,userface
+        from user  where u_phone = #{phone}
+    </select>
+    <update id="updateUser" parameterType="User">
+        update user
+        <set>
+            <if test="uname != null and uname !=''">u_name = #{uname},</if>
+            <if test="gender != null and email !=''">gender = #{gender},</if>
+            <if test="email != null and email !=''">email = #{email},</if>
+            <if test="userface != null and userface !=''">userface = #{userface},</if>
+            <if test="password != null and password !=''">u_password = #{password},</if>
+            <if test="phone != null and phone !=''">u_phone = #{phone},</if>
+        </set>
+            where u_id = #{uid}
+    </update>
+    <select id="findUserByCondition" parameterType="UserVo" resultType="User">
+        select u_id uid,u_name uname,u_phone phone,gender,email,userface from user
+        <where>
+            <if test="uid != null and uid != 0">
+                u_id = #{uid}
+            </if>
+            <if test="uname != null and uname != ''">
+                and u_name = #{uname}
+            </if>
+            <if test="phone != null and phone != ''">
+                and u_phone = #{phone}
+            </if>
+            <if test="email != null and email != ''">
+                and email = #{email}
+            </if>
+        </where>
+        limit #{pageNo},#{pageSize}
+    </select>
+
+    <select id="findAllCount" resultType="int" parameterType="UserVO">
+        select count(*) from user
+        <where>
+            <if test="uid != null and uid != 0">
+                u_id = #{uid}
+            </if>
+            <if test="uname != null and uname != ''">
+                and u_name = #{uname}
+            </if>
+            <if test="phone != null and phone != ''">
+                and u_phone = #{phone}
+            </if>
+            <if test="email != null and email != ''">
+                and email = #{email}
+            </if>
+        </where>
+    </select>
+</mapper>

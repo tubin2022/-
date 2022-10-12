@@ -1,0 +1,67 @@
+<!-- 自定义顶部导航栏 -->
+<navigation-bar title="天气查询" typei="0"></navigation-bar>
+<!-- body -->
+<!-- 文本区域,最后更新时间-moz-background-size:100% 100%; -->
+<view class="Shelf" style="text-align:right;background-image: url('{{weatherImg}}');background-size:100% 100%;">
+  <view style="margin-top: 9%;">
+    <picker mode="region" bindchange="change">
+      <view class="text" style="display: flex;align-items: center;justify-content:center;" wx:if="{{region.length==0}}">城市选择 </view>
+      <view class="text">{{region}}</view>
+    </picker>
+  </view>
+  <view  style="width: 100%;">
+    <view class="text1" style="text-align:center;height: 100rpx;margin-left: 5%;margin-top: 5%;">
+    <view class="text" wx:if="{{ region.length > 0 }}">天气：{{now.weather}}</view>
+    </view>
+    <!-- 占位符 -->
+    <view style="height: 200rpx;">
+    </view>
+    <view class="text2" style="text-align:right;height: 90rpx;margin-left: 5%;margin-top: 2%;">
+      <view class="text" wx:if="{{ region.length > 0 }}" style="font-size: 20px;">最后更新时间：{{now.time}}</view>
+    </view>
+  </view>
+<!-- 天气详细信息，都使用变量表示 -moz-background-size:100% 100%;-->
+<!-- 占位符 -->
+<view class="detail" wx:if="{{ region.length == 0 }}" style="height: 650rpx;"></view>
+<view class="detail"  wx:if="{{ region.length > 0 }}">
+  <view class="item1">
+    <view class="text" wx:if="{{ region.length > 0 }}">相对湿度</view>
+  </view>
+  <view class="item2">
+    <view class="text" wx:if="{{ region.length > 0 }}">{{now.SD}}</view>
+  </view>
+  <view class="item1">
+    <view class="text" wx:if="{{ region.length > 0 }}">风向</view>
+  </view>
+  <view class="item2">
+    <view class="text" wx:if="{{ region.length > 0 }}">{{now.WD}}</view>
+  </view>
+  <view class="item1">
+    <view class="text" wx:if="{{ region.length > 0 }}">温度</view>
+  </view>
+  <view class="item2">
+    <view class="text" wx:if="{{ region.length > 0 }}">{{now.temp}}</view>
+  </view>
+  <view class="item1">
+    <view class="text" wx:if="{{ region.length > 0 }}">风速</view>
+  </view>
+  <view class="item2">
+    <view class="text" wx:if="{{ region.length > 0 }}">{{now.wse}}</view>
+  </view>
+  <view class="item1">
+    <view class="text" wx:if="{{ region.length > 0 }}">PM2.5</view>
+  </view>
+  <view class="item2">
+    <view class="text" wx:if="{{ region.length > 0 }}">{{now.pm25}}</view>
+  </view>
+  <view class="item1">
+    <view class="text" wx:if="{{ region.length > 0 }}">风力</view>
+  </view>
+  <view class="item2">
+    <view class="text" wx:if="{{ region.length > 0 }}">{{now.WS}}</view>
+  </view>
+  <!-- 占位符 -->
+  <view style="height: 50rpx;width: 100%;">
+  </view>
+</view>
+</view>

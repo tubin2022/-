@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ecjtu.ferry.dao.TicketsDao">
+    <insert id="addTicket" parameterType="Tickets">
+        insert into all_ticket values (#{bid},#{sid},#{total},#{surplus},#{price},#{startSale},#{endSale},#{tid})
+    </insert>
+    <select id="findByCondition" parameterType="TicketsVO" resultType="Tickets">
+        select ticket_id tid,fb_id bid,fs_id sid,total,surplus,price,start_sale startSale,end_sale endSale
+        from all_ticket
+        <where>
+            <if test="bid !=null and bid != 0">
+                fb_id = #{bid}
+            </if>
+            <if test="sid !=null and sid != 0">
+                and fs_id = #{sid}
+            </if>
+        </where>
+        limit #{pageNo},#{pageSize}
+    </select>
+    
+    <resultMap id="TicketMap" type="TicketsDTO">
+        <id property="tid" column="tid"/>
+        <result property="total" column="total"/>
+        <result property="surplus" column="surplus"/>
+        <result property="price" column="price"/>
+        <result property="startSale" column="startSale"/>
+        <result property="endSale" column="endSale"/>
+        <association property="boat" column="bid">
+            <id property="bid" column="bid"/>
+            <result property="bname" column="fb_name"/>
+            <result property="bphoto" column="fb_photo"/>
+            <result property="profile" column="profile"/>
+        </association>
+        <association property="shift" column="sid">
+            <id property="sid" column="sid"/>
+            <result property="startCity" column="fs_start_city"/>
+            <result property="endCity" column="fs_end_city"/>
+            <result property="startTime" column="fs_start_time"/>
+            <result property="endTime" column="fs_arrive_time"/>
+        </association>
+    </resultMap>
+    <select id="pageQueryTicket" parameterType="TicketsVO" resultMap="TicketMap">
+        select t.ticket_id tid,t.fb_id bid,t.fs_id sid,t.total,t.surplus,t.price,t.start_sale startSale,t.end_sale endSale,
+          b.*,s.*     
+        from all_ticket t,ferry_boat b,ferry_shift s where t.fb_id = b.fb_id and t.fs_id = s.fs_id
+        <if test="startCity != null and startCity !=''">
+            and fs_start_city like #{startCity}
+        </if>
+        <if test="endCity != null and endCity !=''">
+            and fs_end_city like #{endCity}
+        </if>
+        <if test="startTime != null and startTime !=''">
+            and fs_start_time like #{startTime}
+        </if>
+        <if test="startTime == null">
+            and fs_start_time &gt;= now()
+        </if>
+        <if test="endTime != null and endTime !=''">
+            and fs_arrive_time &gt;= #{endTime}
+        </if>
+        <if test="tid != null and tid !=0">
+            and ticket_id = #{tid}
+        </if>
+        limit #{pageNo},#{pageSize}
+    </select>
+
+    <update id="updateTicket" parameterType="Tickets">
+        update all_ticket
+        <set>
+            <if test="bid != null and bid !=0">
+                fb_id = #{bid},
+            </if>
+            <if test="price != null and price > 0">
+                price = #{price}
+            </if>
+        </set>
+        where ticket_id = #{tid}
+    </update>
+
+    <delete id="deleteById" parameterType="integer">
+        delete from all_ticket where ticket_id = #{tid}
+    </delete>
+    
+    <delete id="deleteTicket" parameterType="map">
+        delete from all_ticket
+        <where>
+            <if test="bid != null and bid != 0">
+                fb_id = #{bid}
+            </if>
+            <if test="sid != null and sid != 0">
+                and fs_id = #{sid}
+            </if>
+        </where>
+    </delete>
+    
+    <update id="updateSurplus" parameterType="map">
+        update all_ticket
+        <set>
+            <if test="i &gt;0">
+                surplus = surplus + #{i},
+            </if>
+            <if test="i &lt;0">
+                surplus = surplus #{i},
+            </if>
+        </set>
+
+        where ticket_id = #{tid}
+    </update>
+
+    <select id="findAllCount" parameterType="TicketsVO" resultType="int">
+        select count(*)
+        from all_ticket t,ferry_boat b,ferry_shift s where t.fb_id = b.fb_id and t.fs_id = s.fs_id
+        <if test="startCity != null and startCity !=''">
+            and fs_start_city like #{startCity}
+        </if>
+        <if test="endCity != null and endCity !=''">
+            and fs_end_city like #{endCity}
+        </if>
+        <!--如果前端传了时间，就匹配当天时间的票 -->
+        <if test="startTime != null and startTime !=''">
+            and fs_start_time like #{startTime}
+        </if>
+        <!--如果前端没有传时间，就查询当天及以后时间的票 -->
+        <if test="startTime == null">
+            and fs_start_time &gt;= now()
+        </if>
+        <if test="endTime != null and endTime !=''">
+            and fs_arrive_time &gt;= #{endTime}
+        </if>
+        <if test="tid != null and tid !=0">
+            and ticket_id = #{tid}
+        </if>
+    </select>
+</mapper>

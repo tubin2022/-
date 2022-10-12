@@ -1,0 +1,109 @@
+<!-- 自定义顶部导航栏 -->
+<navigation-bar title="订单" typei="2"></navigation-bar>
+<!-- body -->
+<view class="Div">
+<van-tabs bind:click="changePage" nav-class="nav-class" swipeable>
+    <van-tab title="待出行">
+        <!-- 无订单 -->
+            <view class="Shelf" wx:if="{{ ready.length == 0 }}">
+                <view class="emp">
+                    <van-empty description="暂无订单">
+                        <van-button color="linear-gradient(to right, #4bb0ff, #6149f6)" bindtap="gototicket">
+                            前往购票
+                        </van-button>
+                    </van-empty>
+                </view>
+            </view>
+        <!-- 待出行 -->
+        <view wx:for="{{ready}}" wx:key="id" >
+        <view class="cellGap"></view>
+        <van-card  
+        price="{{item.price}}" 
+        thumb="{{item.boat.bphoto}}"
+        data-orderInfo="{{item}}"
+        bindtap="goBoat"
+        >
+        <view slot="title">
+      <span>{{item.startCity}}</span>
+      <span><van-image
+            width="50"
+            height="12"
+            fit="contain"
+            src="/static/箭头.png"
+            /></span>
+      <span>{{item.endCity}}</span>
+  </view>
+            <view slot="desc">
+                <view>出发时间:{{item.startTime}}</view>
+                <view>到达时间:{{item.endTime}}</view>
+            </view>
+            <view slot="num">
+                <van-row>
+                    <van-col span="12">
+                        <span>持有人:{{item.user.uname}}</span>
+                    </van-col>
+                    <van-col span="8" offset="2">
+                        <span style="margin-left: 10%;">
+                            <van-button size="small" round icon="plus" type="warning" catchtap="refund" 
+                            data-oid="{{item.oid}}" data-price="{{item.price}}">退票</van-button>
+                        </span>
+                    </van-col>
+                    <van-col span="2"></van-col>
+                </van-row>
+            </view>
+        </van-card>
+        </view>
+    </van-tab>
+    
+    <van-tab title="已完成" bind:click="getOrder">
+         <!-- 无订单 -->
+        <view class="Shelf" wx:if="{{ finish.length == 0 }}">
+                <view class="emp">
+                    <van-empty description="暂无订单">
+                    </van-empty>
+                </view>
+            </view>
+        <!-- 已完成的订单显示 -->
+        <view  wx:for="{{finish}}" wx:key="id" >
+        <view class="cellGap"></view>
+        <van-card 
+        price="{{item.price}}" 
+        thumb="{{item.boat.bphoto}}"
+        data-finishInfo="{{item}}"
+        bindtap="goBoatFinish">
+        <view slot="title">
+            <span>{{item.startCity}}</span>
+            <span><van-image
+                width="50"
+                height="12"
+                fit="contain"
+                src="/static/箭头.png"
+             
+                /></span>
+            <span>{{item.endCity}}</span>
+        </view>
+            <view slot="desc">
+                <view>出发时间:{{item.startTime}}</view>
+                <view>到达时间:{{item.endTime}}</view>
+            </view>
+            <view slot="num">
+                <span>持有人:{{item.user.uname}}</span>
+                <span style="margin-left: 10%;">
+                </span>
+            </view>
+        </van-card>
+        </view>
+    </van-tab>
+</van-tabs>
+</view>
+<!-- 确认购买改车票 -->
+<!-- <van-dialog
+  use-slot
+  title="购票"
+  show="{{ backShow }}"
+  show-cancel-button
+  bind:cancel="onClose"
+  bind:confirm="backTicket"
+>
+</van-dialog> -->
+<!-- <view class="End">我也是有底线的 OvO</view> -->

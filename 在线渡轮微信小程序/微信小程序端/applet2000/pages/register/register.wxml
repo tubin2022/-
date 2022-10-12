@@ -1,0 +1,44 @@
+<!-- 自定义顶部导航栏 -->
+<navigation-bar title="用户注册" typei="0"></navigation-bar>
+
+<!-- body -->
+<!-- 头部信息栏 -->
+<view class="top">用户注册</view>
+ <van-cell-group>
+ <!-- 手机号 -->
+  <van-field
+    model:value="{{ phone }}"
+    placeholder="请输入手机号"
+    label="手机"
+    required
+    clearable
+  />
+  <!-- 密码 -->
+  <van-field
+    model:value="{{ password }}"
+    placeholder="请输入密码"
+    label="密码"
+    type="password"
+    clearable
+  />
+
+  <van-field
+    model:value="{{ userName }}"
+    placeholder="请输入用户名"
+    label="用户名"
+    clearable
+  />
+  <van-field
+    model:value="{{ email }}"
+    placeholder="请输入邮箱"
+    label='邮箱'
+    clearable
+  />
+</van-cell-group>
+<!-- 注册按钮 -->
+   <view class="btn">
+      <van-button round type="info" bindtap="goRegister" size="large">注册</van-button>
+   </view>
+   <view class="xieyi">
+     <text class="agree">注册即视为同意</text><text class="opinion">中国用户注册协议</text>
+   </view>

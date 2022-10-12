@@ -1,0 +1,85 @@
+<!-- 自定义顶部导航栏 -->
+<navigation-bar title="在线轮渡购票" typei="2">
+<view class="section">
+  <picker mode="region" bindchange="bindPickerChange"> 
+    <view wx:if="{{region.length==0}}" style="font-size: 28rpx;">城市选择</view>
+    <view>{{region[1]}}{{weather}}</view>
+  </picker>
+</view>
+</navigation-bar>
+
+<!-- 轮播图 -->
+<view class="Shelf">
+  <swiper class="swiper" autoplay="{{swiper}}" indicator-dots="{{true}}" indicator-color="white" indicator-active-color="aqua" circular="{{true}}">
+    <swiper-item wx:for="{{travelMsg}}" wx:key="id">
+      <image src="{{item.travelImg}}"></image>
+    </swiper-item>
+  </swiper>
+</view>
+<!-- 滚动通知栏 -->
+<view class="Shelf">
+  <van-notice-bar left-icon="volume-o" text="览东湖，赏汉街，坐游船，乐悠悠。" />
+</view>
+<!-- 船票查询 -->
+<!-- 占位符 -->
+<view class="Shelf" style="margin-top: 5%;">
+</view>
+    <!-- 输入提示 -->
+    <van-row class="name">
+      <van-col span="4" offset="2">出发城市</van-col>
+      <van-col span="5" offset="13">到达城市</van-col>
+    </van-row>
+    <!-- 输入内容 -->
+    <van-cell-group>
+      <!-- 输入城市 -->
+      <van-row>
+          <van-col span="10" offset="1">
+           <van-field  
+           model:value="{{ startName }}"
+           placeholder="请输入出发站"
+            ></van-field>
+          </van-col>
+          <van-col span="2" bindtap="exchange">
+            <image src="/static/xz.jpg" style="width:80rpx;height:80rpx;"></image>
+          </van-col>
+          <van-col span="10" offset="1">
+           <van-field  
+           model:value="{{ endName }}"
+           placeholder="请输入到达站"    
+           input-align="right"
+            ></van-field>
+          </van-col>
+    </van-row>
+      <!-- 选择时间 -->
+    <van-row>
+      <van-col span="22" offset="1">
+        
+      <view>
+            <view style="display: flex;position: absolute;margin-top: 0%;margin-left: 4%;">
+                起售日期:
+            </view>
+            <picker mode="date" value="{{date}}" start="2022-06-01" end="2030-09-01" bindchange="bindDateChange" style="text-align: center;margin-top: 5%;">
+                <view class="picker">
+                    <view wx:if="{{date==''}}">
+                        选择日期
+                    </view>
+                    <view wx:if="{{date!=''}}">
+                        {{date}}
+                    </view>
+                </view>
+            </picker>
+        </view>
+      </van-col>
+    </van-row>
+     
+    </van-cell-group>
+    <!-- 注释 -->
+    <text class="inform">注:请广大旅客持健康码绿码购票乘船，以免给您的出行造成不便</text>
+    <!-- 查询按钮 -->
+    <view class="btn">
+      <van-button round type="info" bindtap="goSearch" size="large">船票查询</van-button>
+    </view>
+
+    
+
+

@@ -1,0 +1,39 @@
+/* 整体 */
+.Div{
+  background-color: 		#F0F0F0;
+  width: 100%;
+
+}
+/* 反馈按钮 */
+.btn{
+  margin: 5%;
+}
+ /* 顶部标识 */
+ .top{
+  font-size: x-large;
+  color: 	#5CACEE;
+  margin-bottom: 10%;
+  /* margin-top: 10%; */
+  Padding-top:10%;
+  font-weight: 700;
+}
+/* 用户需知 */
+.xieyi{
+  margin-top: 15px;
+  margin-left: 15px;
+  font-size: 13px;
+}
+.xieyi,.top{
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+}
+/* 针对某类船票的反馈 */
+.tidAdvice{
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+  font-weight: 500;
+  padding-bottom: 4%;
+}
+

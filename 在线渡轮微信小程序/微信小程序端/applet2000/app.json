@@ -1,0 +1,80 @@
+{
+    "usingComponents": {
+        "navigation-bar": "/Components/navigation-bar/navigation-bar",
+        "pagecont": "/Components/pagecont/pagecont",
+        "van-datetime-picker": "@vant/weapp/datetime-picker/index",
+        "van-notice-bar": "@vant/weapp/notice-bar/index",
+        "van-row": "@vant/weapp/row/index",
+        "van-col": "@vant/weapp/col/index",
+        "van-nav-bar": "@vant/weapp/nav-bar/index",
+        "van-grid": "@vant/weapp/grid/index",
+        "van-grid-item": "@vant/weapp/grid-item/index",
+        "van-button": "@vant/weapp/button/index",
+        "van-field": "@vant/weapp/field/index",
+        "van-card": "@vant/weapp/card/index",
+        "van-empty": "@vant/weapp/empty/index",
+        "van-cell": "@vant/weapp/cell/index",
+        "van-cell-group": "@vant/weapp/cell-group/index",
+        "van-goods-action": "@vant/weapp/goods-action/index",
+        "van-goods-action-icon": "@vant/weapp/goods-action-icon/index",
+        "van-goods-action-button": "@vant/weapp/goods-action-button/index",
+        "van-image": "@vant/weapp/image/index",
+        "van-dialog": "@vant/weapp/dialog/index",
+        "van-tab": "@vant/weapp/tab/index",
+        "van-tabs": "@vant/weapp/tabs/index",
+        "van-sticky": "@vant/weapp/sticky/index",
+        "van-divider": "@vant/weapp/divider/index",
+        "van-icon": "@vant/weapp/icon/index",
+        "van-popup": "@vant/weapp/popup/index"
+    },
+    "pages": [
+        "pages/index/index",
+        "pages/logs/logs",
+        "pages/about/about",
+        "pages/login/login",
+        "pages/register/register",
+        "pages/order/order",
+        "pages/Weather/Weather",
+        "pages/user/user",
+        "pages/feedback/feedback",
+        "pages/result/result",
+        "pages/aboutUs/aboutUs",
+        "pages/boat/boat"
+    ],
+    "lazyCodeLoading": "requiredComponents",
+    "permission": {
+        "scope.userLocation": {
+            "desc": "你的位置信息将用于小程序定位"
+        }
+    },
+    "window": {
+        "backgroundTextStyle": "light",
+        "navigationBarBackgroundColor": "#66A9C9",
+        "navigationBarTitleText": "在线轮渡购票",
+        "navigationBarTextStyle": "black",
+        "navigationStyle": "custom"
+    },
+    "tabBar": {
+        "list": [
+            {
+                "pagePath": "pages/index/index",
+                "text": "首页",
+                "iconPath": "static/首页.png",
+                "selectedIconPath": "static/首页_select.png"
+            },
+            {
+                "pagePath": "pages/order/order",
+                "text": "订单",
+                "iconPath": "static/订单.png",
+                "selectedIconPath": "static/订单_select.png"
+            },
+            {
+                "pagePath": "pages/about/about",
+                "text": "我的",
+                "iconPath": "static/我的.png",
+                "selectedIconPath": "static/我的_select.png"
+            }
+        ]
+    },
+    "sitemapLocation": "sitemap.json"
+}

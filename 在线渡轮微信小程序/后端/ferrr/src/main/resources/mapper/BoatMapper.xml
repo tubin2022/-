@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ecjtu.ferry.dao.BoatDao">
+    <insert id="addBoat" parameterType="Boat">
+        insert into ferry_boat values(null,#{bname},#{produceDate},#{bphoto},#{maxPeople},#{profile})
+    </insert>
+    <delete id="deleteBoatById" parameterType="integer">
+        delete from ferry_boat where fb_id = #{bid}
+    </delete>
+    <select id="findAllCount" resultType="int" parameterType="BoatVO">
+        select count(*) from ferry_boat
+        <where>
+            <if test="bid != null and bid != 0 ">
+                fb_id = #{bid}
+            </if>
+        </where>
+    </select>
+    <select id="findByCondition" parameterType="BoatVO" resultType="Boat">
+        select fb_id bid,fb_name bname,produce_date produceDate,fb_photo bphoto,max_people maxPeople,profile
+        from ferry_boat
+        <where>
+            <if test="bid != null and bid != 0 ">
+                fb_id = #{bid}
+            </if>
+        </where>
+        limit #{pageNo},#{pageSize}
+    </select>
+</mapper>

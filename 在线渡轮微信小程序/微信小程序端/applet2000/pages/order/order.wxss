@@ -1,0 +1,9 @@
+/* 整体 */
+.Div{
+  background-color: 		#F0F0F0;
+  width: 100%;
+
+}
+.cellGap{
+  margin: 15rpx 0;
+}

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ecjtu.ferry.dao.StatisticsDao">
+    <select id="everyDaySales" parameterType="string" resultMap="com.ecjtu.ferry.dao.TicketsDao.TicketMap">
+        select t.ticket_id tid,t.fb_id bid,t.fs_id sid,t.total,t.surplus,t.price,t.start_sale startSale,t.end_sale endSale,
+               b.*,s.*
+        from all_ticket t,ferry_boat b,ferry_shift s where t.fb_id = b.fb_id and t.fs_id = s.fs_id
+        and s.fs_start_time like #{date}
+    </select>
+
+    <select id="everyDayShift" parameterType="string" resultType="Shift">
+        select fs_id sid,fs_start_city startCity,fs_end_city endCity,
+               fs_start_time startTime,fs_arrive_time endTime
+        from ferry_shift
+        where fs_start_time like #{date}
+    </select>
+</mapper>

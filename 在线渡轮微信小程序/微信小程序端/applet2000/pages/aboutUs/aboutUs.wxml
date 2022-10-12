@@ -1,0 +1,11 @@
+<!--pages/aboutUs/aboutUs.wxml-->
+<navigation-bar title="关于我们" typei="0"></navigation-bar>
+<van-empty description="">
+
+<view slot="description"  style="white-space:pre-wrap">
+  此项目由学生开发
+  目前仍在完善之中
+  欢迎用户提出建议
+  联系方式:18269778321    
+</view>
+</van-empty>

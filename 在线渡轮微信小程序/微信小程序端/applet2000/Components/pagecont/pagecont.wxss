@@ -1,0 +1,30 @@
+/* Components/pagecont/pagecont.wxss */
+  .hr{
+    height: 10px;
+  }
+  .item{
+    background-color: #fff;
+    width: 90%;
+    margin: 0 auto;
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  .station{
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  .desc1{
+    font-size: 15px;
+    color: #999;
+    /* margin-bottom: 15px; */
+  }
+  .desc2{
+    font-size: 13px;
+    color: #999;
+  }
+  .ticket{
+    width: 85%;
+  }

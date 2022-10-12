@@ -1,0 +1,24 @@
+   /* 顶部标识 */
+    .top{
+      font-size: x-large;
+      color: brown;
+      margin-bottom: 10%;
+      margin-top: 10%;
+      font-weight: 700;
+    }
+    /* 用户需知 */
+    .xieyi{
+      margin-top: 15px;
+      margin-left: 15px;
+      font-size: 13px;
+    }
+    .xieyi,.top{
+      display: flex;
+      justify-content: center; 
+      align-items: center;
+    }
+    /* 注册按钮 */
+    .btn{
+      margin: 5%;
+    }
+    

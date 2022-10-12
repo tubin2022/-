@@ -1,0 +1,103 @@
+<!-- 自定义顶部导航栏 -->
+<navigation-bar title="我的" typei="2"></navigation-bar>
+<!-- body -->
+<view class="Div">
+<!--账号信息设计-->
+<view class="amountBg">
+  <!--头像-->
+  <view class="img">
+    <image src="{{ userface }}"  style="width:80px;height:80px;" bindtap="gotoUser"></image>
+  </view>
+  <!--账号-->
+  <view class="account">
+    <!-- 默认为请先登录 -->
+    <view>{{username}}</view>
+  </view>
+</view>
+<!--订单导航设计-->
+<van-grid gutter="{{ 10 }}" column-num="3">
+  <!-- 天气查询 -->
+  <van-grid-item
+    icon="/static/天气彩.png"
+    link-type="navigateTo"
+    url="/pages/Weather/Weather"
+    text="天气查询"
+  />
+  <!-- 开始购票 -->
+  <van-grid-item
+    icon="/static/购票彩.png"
+    link-type="reLaunch"
+    url="/pages/index/index"
+    text="开始购票"
+  />
+  <!-- 轮渡订单 -->
+  <van-grid-item
+    icon="/static/订单彩.png"
+    link-type="reLaunch"
+    url="/pages/order/order"
+    text="轮渡订单"
+  />
+</van-grid>
+
+  <!--列表导航设计-->
+  <!-- 我的钱包 -->
+  <view class='cellGap'></view>
+  <view class="item">
+    <view class="icon">
+      <image src="/static/wdcf.jpg" style="width:22px;height:21px"></image>
+    </view>
+    <view class="itemName">
+      <view>我的财富</view>
+      <view class="remark">{{money}}￥</view>
+    </view>
+    <view class="right">
+      <text class="opr" bindtap="Recharge">充值</text>
+    </view>
+  </view>
+
+  <van-cell-group>
+    <view class='cellGap'></view>
+    <!-- 个人信息 -->
+    <van-cell title="个人信息"  link-type="redirectTo"
+    url="/pages/user/user" is-link bindtap="gotoUser" />
+    <!-- 出行服务 -->
+    <!-- <van-cell title="出行服务" value="待完善" /> -->
+    <!-- 意见反馈 -->
+    <view class='cellGap'></view>
+    <van-cell title="意见反馈"  link-type="navigateTo"
+    url="/pages/feedback/feedback" is-link />
+    <!-- 关于我们 -->
+    <view class='cellGap'></view>
+    <van-cell title="关于我们"  link-type="navigateTo"
+    url="/pages/aboutUs/aboutUs" is-link />
+      <!-- 联系客服 -->
+      <view class='cellGap'></view>
+    <van-cell title="联系客服"  link-type="navigateTo"
+    url="" is-link />
+  </van-cell-group>
+  <view class="btn">
+      <van-button round type="warning" bindtap="outLogin" size="large">退出登录</van-button>
+  </view>
+    
+
+
+
+
+
+
+
+
+<van-dialog use-slot title="充值" show="{{ show }}" show-cancel-button  bind:close="onClose"      bind:cancel="onClose"
+  bind:confirm="saveMoney">
+      <van-field
+    model:value="{{ addMoney }}"
+    clearable
+    type="number"
+    label="充值金额"
+    placeholder="请输入充值金额"
+    auto-focus
+    input-align="right" 
+    bind:clear="clear"
+  />
+		</van-dialog>
+  </view>

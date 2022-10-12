@@ -1,0 +1,27 @@
+<!-- 自定义顶部栏 -->
+<cover-view class='nav_box'>
+  <cover-view style='height:{{s}}px' />
+  <cover-view class='navBar' style='height:{{n}}px'>
+    <cover-view class='content' style='height:{{h}}px'>
+      <!-- 导航自定义内容 -->
+        <!-- 默认左部为返回上一页 -->
+        <cover-view class="left" wx:if="{{typei==0}}">
+          <cover-image src='/static/左返回.png' bindtap="onClickLeft">返回</cover-image>
+        </cover-view>
+        <!-- 左部为返回首页 typei为1时可使用-->
+        <cover-view class="left" wx:if="{{typei==1}}">
+          <cover-image src='/static/跳转主页.png' bindtap="onClickHome">返回首页</cover-image>
+        </cover-view>
+        <!-- 可控制显隐插槽 typei为2时可使用 -->
+        <cover-view class="left" wx:if="{{typei==2}}">
+          <slot></slot>
+        </cover-view>
+        <!-- 返回我的页面 -->
+        <cover-view class="left" wx:if="{{typei==3}}">
+          <cover-image src='/static/个人中心页.png' bindtap="onClickPerson">返回我的</cover-image>
+        </cover-view>
+        <cover-view class="title">{{title}}</cover-view>
+    </cover-view>
+  </cover-view>
+</cover-view>
+<view style='height:{{s+n}}px' />

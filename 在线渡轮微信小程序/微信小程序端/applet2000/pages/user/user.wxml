@@ -1,0 +1,116 @@
+<!-- 自定义顶部导航栏 -->
+<navigation-bar title="用户信息" typei="3">
+    <cover-image src='/static/返回.png' bindtap="onClickback">返回</cover-image>
+</navigation-bar>
+<!-- body -->
+<!-- 占位符 -->
+<view style="margin-top: 8%;"></view>
+<!-- 头像 -->
+<van-cell-group inset>
+    <van-cell title="头像" title-class="Info">
+        <!-- <van-icon name="{{user.userface}}" size="80px" /> -->
+        <view solt="extra" bindtap="modifyuserface">
+            <van-image round width="5rem" height="5rem" fit="contain" src="{{user.userface}}" />
+        </view>
+    </van-cell>
+</van-cell-group>
+<!-- 其他信息 -->
+<van-cell-group inset>
+    <van-cell title="uid" value="{{user.uid}}" />
+    
+    <!-- 姓名 -->
+    <van-cell title="姓名" title-class="Info">
+        <view slot="extra">
+            <view wx:if="{{type1==true}}">
+            <van-row>
+                    <van-col span="22">
+                        <van-field model:value="{{input1}}" placeholder="请输入新用户名"  />
+                    </van-col>
+                    <van-col span="2">
+                    
+                        <van-icon name="arrow" class="Info" bindtap="modifyuname" />   
+                    </van-col>
+                </van-row>
+            </view>
+            <view wx:if="{{type1==false}}">  
+                        <span>{{user.uname}}</span>       
+                        <span>
+               <van-icon name="arrow" bindtap="modifyuname" />
+               </span>       
+            </view>
+        </view>
+    </van-cell>
+    <!-- 性别 -->
+    <van-cell title="性别" title-class="Info">
+        <view slot="extra">
+            <!-- 选择框弹出 -->
+            <view class="section" wx:if="{{type2}}">
+                <van-row>
+                    <van-col span="22">
+                        <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+                        <view class="section__title" wx:if="{{type==0}}">点击修改性别</view>
+                        <view class="picker" wx:if="{{type!=0}}">
+                        {{array[index]}}
+                        </view>
+                        </picker>
+                    </van-col>
+                    <van-col span="2">
+                    <van-icon name="arrow" bindtap="modifygender" />
+                    </van-col>
+                </van-row>
+                
+            </view>
+            <!-- 未修改状态 -->
+            <view wx:if="{{!type2}}">
+               <span>{{user.gender}}</span> 
+                <span><van-icon name="arrow" bindtap="modifygender" />
+</span>   
+         </view>
+        </view>
+    </van-cell>
+    <!-- 邮箱 -->
+    <van-cell title="邮箱" title-class="Info">
+        <view slot="extra">
+            <view wx:if="{{type3==true}}">
+            <van-row>
+                    <van-col span="22">
+                        <van-field model:value="{{input3}}" placeholder="请输入新邮箱"  />
+                    </van-col>
+                    <van-col span="2">
+                        <span class="Info"> 
+                        <van-icon name="arrow" class="Info" bindtap="modifyemail" /> </span>  
+                    </van-col>
+            </van-row>
+            </view>
+            <view wx:if="{{type3==false}}">  
+                        <span>{{user.email}}</span>       
+                        <span>
+               <van-icon name="arrow" bindtap="modifyemail" />
+               </span>       
+            </view>
+        </view>
+    </van-cell>
+    <!-- 手机 -->
+    <van-cell title="手机" title-class="Info">
+        <view slot="extra">
+            <view wx:if="{{type4}}">
+               
+                
+                <van-row>
+                    <van-col span="22">
+                        <van-field model:value="{{input4}}" placeholder="请输入新手机号" />
+                    </van-col>
+                    <van-col span="2">
+                        <span> 
+                            <van-icon name="arrow" class="Info" bindtap="modifyPhone" />  </span>  
+                    </van-col>
+            </van-row>
+            </view>
+            <view wx:if="{{!type4}}">
+                {{user.phone}}
+                <van-button  class="text" style="color:darkblue;" bindtap="modifyPhone" type="primary">换绑</van-button>
+                <!-- <span>换绑</span> -->
+            </view>
+        </view>
+    </van-cell>
+</van-cell-group>

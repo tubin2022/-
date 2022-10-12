@@ -1,0 +1,24 @@
+<!--轮渡信息卡片 typei为0是已完成订单，为1是待出行订单，为2是购票卡片-->
+<!-- 占位符 -->
+  <view class="hr"></view>
+  <!-- 轮渡信息展示 -->
+  <view class="item">
+    <view class="ticket">
+        <view class="station"  wx:if="{{typei!=2}}">订单号: {{id}}  </view>
+        <view class="station"  wx:if="{{typei==2}}">渡轮编号: {{id}}  </view>
+      <view class="station">{{start}}--------------------------{{end}}</view>
+      <view class="desc1">出发时间: {{startTime}}</view>
+      <view class="desc1">到达时间: {{endTime}}</view>
+      <view class="desc2" wx:if="{{typei==0}}">已完成</view>
+      <view class="desc2" wx:if="{{typei==2}}">剩余票数:{{remainseat}}  价格:{{price}}</view>
+    </view>
+    <view class="opr" wx:if="{{typei==1}}">
+    <slot></slot>
+    </view>
+    <view class="opr" wx:if="{{typei==1}}">
+    <slot></slot>
+    </view>
+    <view class="opr" wx:if="{{typei==2}}">
+      <slot></slot>
+    </view>
+  </view>

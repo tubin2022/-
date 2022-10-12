@@ -1,0 +1,24 @@
+/* 页面背景 */
+.Div{
+  background-color: 		#F0F0F0;
+  width: 100%;
+  padding-top: 20rpx;
+}
+/* 调整每条信息之间的间隔 */
+.cellGap{
+  margin: 15rpx 0;
+}
+/* 商品卡片 */
+.card{
+  margin-top: 5%;
+}
+/* .End{
+
+  display: flex;
+  justify-content: center;
+  color: rgb(126, 126, 126);
+} */
+/* 单元格样式 */
+.ticket{
+  margin-top: 15rpx;
+}

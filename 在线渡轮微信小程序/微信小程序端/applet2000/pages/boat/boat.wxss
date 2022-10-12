@@ -1,0 +1,32 @@
+
+.Div{
+    background-color: #F0F0F0;
+    width: 100%;
+    padding-top: 20rpx;
+  }
+.cardTile {
+    color: black;
+    font-weight: bolder;
+    font-size: 20px;
+  }
+
+  .cardPrice {
+    color: red;
+    font-weight: bolder;
+    font-size: 18px;
+  }
+  .cardFoot {
+    color: blue;
+  }
+  .custom-title {
+    color: black;
+    font-weight: bolder;
+    font-size: 18px;
+  }
+  .detailLabel {
+    color: black;
+    font-weight: bold;
+  }
+ 
+  /* 商品卡片风格 */
+  /* .cardInset{} */

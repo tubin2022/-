@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ecjtu.ferry.dao.ShiftDao">
+    <insert id="addShift" parameterType="Shift">
+        insert into ferry_shift values(null,#{startCity},#{endCity},#{startTime},#{endTime})
+    </insert>
+    <delete id="deleteShift" parameterType="integer">
+        delete from ferry_shift where fs_id = #{id}
+    </delete>
+    <select id="findAllCount" resultType="int" parameterType="ShiftVO">
+        select count(*) from ferry_shift
+        <where>
+            <if test="sid != null and sid != 0">
+                fs_id = #{sid}
+            </if>
+            <if test="startCity != null and startCity != ''">
+                and fs_start_city like #{startCity}
+            </if>
+            <if test="endCity != null and endCity != ''">
+                and fs_end_city like #{endCity}
+            </if>
+            <if test="startTime != null and startTime != ''">
+                and fs_start_time like #{startTime}
+            </if>
+            <if test="endTime != null and endTime != ''">
+                and fs_arrive_time like #{endTime}
+            </if>
+        </where>
+    </select>
+    <select id="findByCondition" parameterType="ShiftVO" resultType="Shift">
+        select fs_id sid,fs_start_city startCity,fs_end_city endCity,
+        fs_start_time startTime,fs_arrive_time endTime
+        from ferry_shift
+        <where>
+            <if test="sid != null and sid != 0">
+                fs_id = #{sid}
+            </if>
+            <if test="startCity != null and startCity != ''">
+                and fs_start_city like #{startCity}
+            </if>
+            <if test="endCity != null and endCity != ''">
+                and fs_end_city like #{endCity}
+            </if>
+            <if test="startTime != null and startTime != ''">
+                and fs_start_time like #{startTime}
+            </if>
+            <if test="endTime != null and endTime != ''">
+                and fs_arrive_time like #{endTime}
+            </if>
+        </where>
+        limit #{pageNo},#{pageSize}
+    </select>
+    <update id="updateShift" parameterType="Shift">
+        update ferry_shift
+        <set>
+            <if test="startCity != null and startCity != ''">
+                fs_start_city = #{startCity},
+            </if>
+            <if test="endCity != null and endCity != ''">
+                fs_end_city = #{endCity},
+            </if>
+            <if test="startTime != null">
+                fs_start_time = #{startTime},
+            </if>
+            <if test="endTime != null">
+                fs_arrive_time = #{endTime}
+            </if>
+        </set>
+        where fs_id = #{sid}
+    </update>
+
+    <select id="findTicketsByShiftId" parameterType="Integer" resultType="Order">
+        SELECT t.t_id oid,t.u_id uid,t.ticket_id tid,t.t_price price,t.start_city startCity,
+               t.end_city endCity,t.start_time startTime,t.arrive_time endTime
+        FROM ferry_shift s,all_ticket AT,ticket t
+        WHERE s.fs_id = at.fs_id AND at.ticket_id = t.ticket_id AND s.fs_id = #{sid}
+    </select>
+</mapper>

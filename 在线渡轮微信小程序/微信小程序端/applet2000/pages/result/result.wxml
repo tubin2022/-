@@ -1,0 +1,65 @@
+<!-- 自定义顶部导航栏 -->
+<navigation-bar title="购票" typei="0"></navigation-bar>
+<!-- body -->
+<view class="Div">
+ <!-- 当页面搜索无记录时显示提示信息 -->
+  <view wx:if="{{failShow}}" class="ticket">
+    <van-empty  image="https://img.yzcdn.cn/vant/custom-empty-image.png" description="抱歉，没有搜索到相关航次.." />
+  </view>
+  <view  wx:for="{{search}}" wx:key="id">
+  <view class="cellGap"></view>
+  <van-card
+  class="card"
+  price="{{item.price}}"
+  thumb="{{item.boat.bphoto}}"
+>
+  <view slot="title">
+      <span>{{item.shift.startCity}}</span>
+            <span><van-image
+        width="50"
+        height="12"
+        fit="contain"
+        src="/static/箭头.png"
+      /></span>
+      <span>{{item.shift.endCity}}</span>
+  </view>
+  <!-- 时间描述 -->
+  <view slot="desc">
+    <view>出发时间:{{item.shift.startTime}}</view>
+    <view>到达时间:{{item.shift.endTime}}</view>
+  </view>
+  <!-- 数量 -->
+  <view slot="num">
+                <van-row>
+                    <van-col span="11">
+                      <span>当前剩余{{item.surplus}}张</span>
+                    </van-col>
+                    <van-col span="10" offset="2">
+                        <span>
+                        <van-button
+                      size="small"
+                      round
+                      type="info"
+                      bindtap="addTicket"
+                      data-ticketInfo="{{item}}"
+                      >
+                      查看详情 
+                      </van-button>
+                      </span>
+                    </van-col>
+                    <van-col span="1"></van-col>
+                </van-row>
+  </view>
+  </van-card>
+  </view>
+<!-- 加载的显示 -->
+
+</view>
+  <view hidden="{{!searchLoading}}">
+		<van-divider contentPosition="center" textColor="#1989fa">加载中</van-divider>
+	</view>
+	<view hidden="{{searchLoadingComplete}}">
+		<van-divider contentPosition="center" textColor="#1989fa">已加载全部</van-divider>
+	</view>
+
+ 

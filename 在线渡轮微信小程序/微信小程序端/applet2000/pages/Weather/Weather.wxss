@@ -1,0 +1,55 @@
+/* pages/weathe/weathe.wxss */
+.Shelf{
+  width: 100%;
+  display: flex;
+  flex-direction: column;         
+  align-items: center;            
+  justify-content: space-around;
+}
+.detail{                            
+  /* display: flex;                      */
+  /* flex-direction: column;         */
+  width: 100%;
+  /* height: 500rpx;     */
+  display:flex;
+    align-items:center;
+    justify-content: space-between;
+    flex-wrap:wrap;                 
+}
+.item1,.item2,.item3{
+  /* display: flex; */
+  /* flex-direction:row; */
+  /* margin: 60rpx 46rpx 60rpx 46rpx; */
+  display:flex;
+    align-items:center;
+    justify-content:center;
+    width: 158rpx;
+    height: 208rpx;
+    list-style:none;
+  text-align: center;
+  margin-right: 2%;
+  /* color: #F26B1F; */
+}
+text{
+  font-size: 50rpx;             
+  /* color: #F26B1F; */
+}
+/* 描边字体 */
+.text {
+  position: relative;
+  color: aqua;
+}
+.text::before, .text::after {
+  content: attr(data-text);
+  font-size: 48rpx;
+  color: #fff;
+  font-weight: 900; 
+}
+.text::before {
+  -webkit-text-stroke: 8rpx #000;
+}
+.text::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+}

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ecjtu.ferry.dao.FeedbackDao">
+    <insert id="addFeedback" parameterType="Feedback">
+        insert into feedback values(#{fid},#{uid},#{context},#{fdate})
+    </insert>
+    <select id="findByCondition" parameterType="FeedbackVO" resultType="Feedback">
+        select f_id fid,u_id uid,f_context context,f_date fdate from feedback
+        <where>
+            <if test="uid != null and uid !=0">
+                u_id = #{uid}
+            </if>
+            <if test="context != null and context !=''">
+                and f_context like #{context}
+            </if>
+            <if test="fdate != null and fdate !=''">
+                and f_date like #{fdate}
+            </if>
+        </where>
+        limit #{pageNo},#{pageSize}
+    </select>
+    <select id="findAllCount" resultType="int" parameterType="FeedbackVO">
+        select count(*) from feedback
+        <where>
+            <if test="uid != null and uid !=0">
+                u_id = #{uid}
+            </if>
+            <if test="context != null and context !=''">
+                and f_context like #{context}
+            </if>
+            <if test="fdate != null and fdate !=''">
+                and f_date like #{fdate}
+            </if>
+        </where>
+    </select>
+    <delete id="deleteById" parameterType="integer">
+        delete from feedback where f_id = #{fid}
+    </delete>
+    <delete id="deleteByCondition" parameterType="FeedbackVO">
+        delete from feedback
+        <where>
+            <if test="uid != null and uid !=0">
+                u_id = #{uid}
+            </if>
+            <if test="context != null and context !=''">
+                and f_context like #{context}
+            </if>
+            <if test="fdate != null and fdate !=''">
+                and f_date like #{fdate}
+            </if>
+        </where>
+    </delete>
+</mapper>
